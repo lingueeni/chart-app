@@ -53,7 +53,6 @@ export default function LandingPage() {
           <PieChartCard title="Users vs Admins" data={charts.slice(0, 2)} />
           <PieChartCard title="Active vs Inactive" data={charts.slice(2, 4)} />
         </div>
-        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {cards.map((card) => (
             <CardItem
