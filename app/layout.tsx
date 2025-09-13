@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
         <Navbar />
-        <main className="max-w-7xl mx-auto p-10">{children}</main>
+        <main className="max-w-7xl mx-auto px-1 py-1">{children}</main>
       </body>
     </html>
   );

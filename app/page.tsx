@@ -41,7 +41,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-4 py-10">
       <div className="max-w-7xl mx-auto space-y-12">
         <PageHeader />
 
