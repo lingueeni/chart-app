@@ -45,8 +45,6 @@ export default function LandingPage() {
       <div className="max-w-7xl mx-auto space-y-12">
         <PageHeader />
 
-        <HealthForm />
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <HealthTable rows={tableData.slice(0, 6)} />
 

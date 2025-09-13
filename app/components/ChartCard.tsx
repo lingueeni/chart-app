@@ -26,7 +26,7 @@ export default function ChartCard({ title, data }: ChartCardProps) {
             data={data}
             dataKey="value"
             nameKey="label"
-            outerRadius={100}
+            outerRadius={90}
             fill="#8884d8"
             label
           >
