@@ -1,44 +1,24 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { Key } from "react";
 import PageHeader from "./components/PageHeader";
-import HealthForm from "./components/HealthForm";
 import HealthTable from "./components/HealthTable";
 import PieChartCard from "./components/ChartCard";
 import CardItem from "./components/CardItem";
 import ExtraTable from "./components/ExtraTable";
 
-export default function LandingPage() {
-  const [charts, setCharts] = useState<any[]>([]);
-  const [tableData, setTableData] = useState<any[]>([]);
-  const [cards, setCards] = useState<any[]>([]);
-  const [extraTable, setExtraTable] = useState<any[]>([]);
+async function getData(endpoint: string) {
+  const res = await fetch(
+    `https://my-json-server.typicode.com/lingueeni/my-dashboard-data/${endpoint}`,
+    { cache: "no-store" } // always fresh data
+  );
+  if (!res.ok) throw new Error("Failed to fetch " + endpoint);
+  return res.json();
+}
 
-  useEffect(() => {
-    fetch(
-      "https://my-json-server.typicode.com/lingueeni/my-dashboard-data/charts"
-    )
-      .then((res) => res.json())
-      .then((data) => setCharts(data));
-
-    fetch(
-      "https://my-json-server.typicode.com/lingueeni/my-dashboard-data/tableData"
-    )
-      .then((res) => res.json())
-      .then((data) => setTableData(data));
-
-    fetch(
-      "https://my-json-server.typicode.com/lingueeni/my-dashboard-data/cards"
-    )
-      .then((res) => res.json())
-      .then((data) => setCards(data));
-
-    fetch(
-      "https://my-json-server.typicode.com/lingueeni/my-dashboard-data/extraTable"
-    )
-      .then((res) => res.json())
-      .then((data) => setExtraTable(data));
-  }, []);
+export default async function LandingPage() {
+  const charts = await getData("charts");
+  const tableData = await getData("tableData");
+  const cards = await getData("cards");
+  const extraTable = await getData("extraTable");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-4 py-10">
@@ -52,14 +32,21 @@ export default function LandingPage() {
           <PieChartCard title="Active vs Inactive" data={charts.slice(2, 4)} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {cards.map((card) => (
-            <CardItem
-              key={card.id}
-              title={card.title}
-              value={card.value}
-              color={card.color}
-            />
-          ))}
+          {cards.map(
+            (card: {
+              id: Key | null | undefined;
+              title: string;
+              value: string | number;
+              color: string;
+            }) => (
+              <CardItem
+                key={card.id}
+                title={card.title}
+                value={card.value}
+                color={card.color}
+              />
+            )
+          )}
         </div>
 
         <ExtraTable rows={extraTable} />
