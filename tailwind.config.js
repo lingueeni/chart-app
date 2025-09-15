@@ -5,7 +5,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}", // if you use pages dir
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  safelist: ["bg-blue-500", "bg-orange-400", "bg-amber-400", "bg-red-500"],
+  safelist: ["bg-blue-700", "bg-orange-600", "bg-amber-600", "bg-red-600"],
   theme: {
     extend: {},
   },

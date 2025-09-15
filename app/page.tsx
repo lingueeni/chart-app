@@ -21,7 +21,7 @@ export default async function LandingPage() {
   const extraTable = await getData("extraTable");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-[#0f1120] via-[#1a1c2c] to-[#0f1120] text-gray-200 px-4 py-10">
       <div className="max-w-7xl mx-auto space-y-12">
         <PageHeader />
 

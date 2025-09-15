@@ -3,28 +3,30 @@ import "../globals.css";
 
 export default function Navbar() {
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-gradient-to-r from-[#141627] to-[#1c1f36] shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-blue-600">
-          AD x-ray
+        {/* Logo / Title */}
+        <Link href="/" className="text-2xl font-bold text-blue-400">
+          AD X-Ray
         </Link>
 
-        <div className="space-x-6">
+        {/* Navigation Links */}
+        <div className="space-x-8">
           <Link
             href="/"
-            className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+            className="text-gray-300 hover:text-blue-400 transition-colors font-semibold text-lg"
           >
             Dashboard
           </Link>
           <Link
             href="/reports"
-            className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+            className="text-gray-300 hover:text-blue-400 transition-colors font-semibold text-lg"
           >
             Reports
           </Link>
           <Link
             href="/settings"
-            className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+            className="text-gray-300 hover:text-blue-400 transition-colors font-semibold text-lg"
           >
             Settings
           </Link>

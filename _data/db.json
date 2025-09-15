@@ -54,25 +54,25 @@
       "id": 1,
       "title": "Total Users",
       "value": 1200,
-      "color": "bg-blue-500"
+      "color": "bg-blue-700"
     },
     {
       "id": 2,
       "title": "Total DCs",
       "value": 4,
-      "color": "bg-orange-400"
+      "color": "bg-orange-600"
     },
     {
       "id": 3,
       "title": "Sites",
       "value": 3,
-      "color": "bg-amber-400"
+      "color": "bg-amber-600"
     },
     {
       "id": 4,
       "title": "Replication",
       "value": "Warning",
-      "color": "bg-red-500"
+      "color": "bg-red-600"
     }
   ],
   "extraTable": [
