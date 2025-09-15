@@ -4,6 +4,8 @@ import HealthTable from "./components/HealthTable";
 import PieChartCard from "./components/ChartCard";
 import CardItem from "./components/CardItem";
 import ExtraTable from "./components/ExtraTable";
+import ForestCard from "./components/ForestCard";
+import SitesCard from "./components/SitesCard";
 
 async function getData(endpoint: string) {
   const res = await fetch(
@@ -24,7 +26,6 @@ export default async function LandingPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#0f1120] via-[#1a1c2c] to-[#0f1120] text-gray-200 px-4 py-10">
       <div className="max-w-7xl mx-auto space-y-12">
         <PageHeader />
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <HealthTable rows={tableData.slice(0, 6)} />
 
@@ -48,8 +49,13 @@ export default async function LandingPage() {
             )
           )}
         </div>
-
-        <ExtraTable rows={extraTable} />
+        <div className="p-8 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <ExtraTable rows={extraTable} />
+            <ForestCard />
+          </div>
+          <SitesCard />
+        </div>
       </div>
     </div>
   );
