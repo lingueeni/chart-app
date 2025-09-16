@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
-
 interface Domain {
   name: string;
-  osVersion: number;
+  osVersion: string;
   upTime: { [key: string]: string }[];
 }
 
@@ -20,8 +18,6 @@ interface ForestInfo {
 }
 
 export default function ForestCard() {
-  const [selectedDomain, setSelectedDomain] = useState<string>("");
-
   const forestData: ForestInfo = {
     forestName: "ContosoForest",
     domainName: "contoso.local",
@@ -29,101 +25,109 @@ export default function ForestCard() {
     domainFunctionLevel: "Windows Server 2016",
     schemaVersion: "87",
     recycleBin: true,
-    fsmoRole: "RID Master",
+    fsmoRole: "Schema Master",
     domains: [
       {
         name: "contoso.local",
-        osVersion: 2019,
+        osVersion: "Windows Server 2012 R2",
         upTime: [{ Days: "15" }, { Hours: "12" }, { Minutes: "45" }],
       },
       {
         name: "hr.contoso.local",
-        osVersion: 2016,
+        osVersion: "Windows Server 2019",
         upTime: [{ Days: "32" }, { Hours: "8" }, { Minutes: "5" }],
       },
     ],
   };
 
-  const selectedDomainData = forestData.domains.find(
-    (d) => d.name === selectedDomain
-  );
-
   return (
-    <div className="bg-gradient-to-br from-[#141627] to-[#1c1f36] p-6 rounded-2xl shadow-lg hover:shadow-indigo-500/40 transition-shadow duration-300">
-      <h2 className="text-xl font-semibold mb-4 text-gray-200">Forest Info</h2>
-      <table className="w-full text-left text-gray-300">
-        <tbody>
-          <tr>
-            <td className="py-2 font-medium">Forest Name</td>
-            <td className="py-2">{forestData.forestName}</td>
-          </tr>
-          <tr>
-            <td className="py-2 font-medium">Domain Name</td>
-            <td className="py-2">
-              <select
-                value={selectedDomain}
-                onChange={(e) => setSelectedDomain(e.target.value)}
-                className="bg-[#1c1f36] border border-gray-600 text-gray-200 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">-- Select Domain --</option>
-                {forestData.domains.map((domain, idx) => (
-                  <option key={idx} value={domain.name}>
-                    {domain.name}
-                  </option>
-                ))}
-              </select>
-            </td>
-          </tr>
+    <div className="w-full bg-[#221E33] p-6 rounded-xl shadow-md hover:shadow-[0_0_20px_3px_rgba(99,102,241,0.4)] transition-shadow duration-300">
+      <h2 className="font-poppins text-2xl font-bold text-indigo-400 mb-6">
+        Forest and Domain Controller Info
+      </h2>
 
-          {selectedDomainData && (
-            <tr>
-              <td colSpan={2} className="py-3">
-                <div className="bg-[#1c1f36] p-4 rounded-lg border border-gray-700">
-                  <h3 className="text-gray-200 font-semibold mb-2">
-                    {selectedDomainData.name}
-                  </h3>
-                  <p className="text-sm text-gray-300">
-                    <span className="font-medium">OS Version:</span>{" "}
-                    {selectedDomainData.osVersion}
-                  </p>
-                  <p className="text-sm text-gray-300 mt-2">
-                    <span className="font-medium">UpTime:</span>{" "}
-                    {selectedDomainData.upTime.map((item, i) => {
-                      const key = Object.keys(item)[0];
-                      return (
-                        <span key={i} className="mr-2">
-                          {key}: {item[key]}
-                        </span>
-                      );
-                    })}
-                  </p>
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-base text-gray-300 border-collapse">
+          <tbody>
+            <tr className="border-b border-gray-700">
+              <td className="px-3 py-3 text-gray-400 w-1/2">Forest Name</td>
+              <td className="px-3 py-3">{forestData.forestName}</td>
+            </tr>
+
+            <tr className="border-b border-gray-700">
+              <td colSpan={2} className="px-3 py-3">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full text-left text-gray-300 text-sm border-collapse">
+                    <thead>
+                      <tr className="bg-[#24283d] text-gray-200">
+                        <th className="font-inter text-sm text-gray-200 px-3 py-2">
+                          Domain
+                        </th>
+                        <th className="font-inter text-sm text-gray-200 px-3 py-2">
+                          OS Version
+                        </th>
+                        <th className="font-inter text-sm text-gray-200 px-3 py-2">
+                          UpTime
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {forestData.domains.map((domain, i) => (
+                        <tr
+                          key={i}
+                          className={`${
+                            i % 2 === 0 ? "bg-[#1c1f2e]" : "bg-[#141627]"
+                          } hover:bg-indigo-900/30`}
+                        >
+                          <td className="font-roboto px-3 py-2 whitespace-nowrap">
+                            {domain.name}
+                          </td>
+                          <td className="font-roboto px-3 py-2 whitespace-nowrap">
+                            {domain.osVersion}
+                          </td>
+                          <td className="font-roboto px-3 py-2 whitespace-nowrap">
+                            {domain.upTime.map((u, j) => {
+                              const key = Object.keys(u)[0];
+                              return (
+                                <span key={j} className="mr-3">
+                                  {key}: {u[key]}
+                                </span>
+                              );
+                            })}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </td>
             </tr>
-          )}
 
-          <tr>
-            <td className="py-2 font-medium">Forest Function Level</td>
-            <td className="py-2">{forestData.forestFunctionLevel}</td>
-          </tr>
-          <tr>
-            <td className="py-2 font-medium">Domain Function Level</td>
-            <td className="py-2">{forestData.domainFunctionLevel}</td>
-          </tr>
-          <tr>
-            <td className="py-2 font-medium">Schema Version</td>
-            <td className="py-2">{forestData.schemaVersion}</td>
-          </tr>
-          <tr>
-            <td className="py-2 font-medium">Recycle Bin</td>
-            <td className="py-2">{forestData.recycleBin ? "True" : "False"}</td>
-          </tr>
-          <tr>
-            <td className="py-2 font-medium">FSMO Role</td>
-            <td className="py-2">{forestData.fsmoRole}</td>
-          </tr>
-        </tbody>
-      </table>
+            <tr className="border-b border-gray-700">
+              <td className="px-3 py-3 text-gray-400">Forest Function Level</td>
+              <td className="px-3 py-3">{forestData.forestFunctionLevel}</td>
+            </tr>
+            <tr className="border-b border-gray-700">
+              <td className="px-3 py-3 text-gray-400">Domain Function Level</td>
+              <td className="px-3 py-3">{forestData.domainFunctionLevel}</td>
+            </tr>
+            <tr className="border-b border-gray-700">
+              <td className="px-3 py-3 text-gray-400">Schema Version</td>
+              <td className="px-3 py-3">{forestData.schemaVersion}</td>
+            </tr>
+            <tr className="border-b border-gray-700">
+              <td className="px-3 py-3 text-gray-400">Recycle Bin</td>
+              <td className="px-3 py-3">
+                {forestData.recycleBin ? "True" : "False"}
+              </td>
+            </tr>
+            <tr>
+              <td className="px-3 py-3 text-gray-400">FSMO Role</td>
+              <td className="px-3 py-3">{forestData.fsmoRole}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -7,7 +7,13 @@ module.exports = {
   ],
   safelist: ["bg-blue-700", "bg-orange-600", "bg-amber-600", "bg-red-600"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        roboto: ["var(--font-roboto)", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

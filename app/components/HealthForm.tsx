@@ -20,7 +20,7 @@ export default function HealthForm() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#141627] to-[#1c1f36] p-8 rounded-2xl shadow-lg hover:shadow-[0_0_20px_3px_rgba(56,189,248,0.4)] transition-shadow duration-300">
+    <div className="bg-[#221E33] p-8 rounded-2xl shadow-lg ">
       <h2 className="text-2xl font-bold text-gray-200 mb-6">
         Enter Domain Information
       </h2>
@@ -34,7 +34,7 @@ export default function HealthForm() {
           placeholder="Domain Name"
           value={form.domain}
           onChange={handleChange}
-          className="bg-[#1a1c2e] border border-gray-700 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-[#1a1c2e] border border-gray-700 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none"
           required
         />
         <input
@@ -68,7 +68,7 @@ export default function HealthForm() {
         <div className="col-span-1 md:col-span-2 flex justify-center mt-4">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:shadow-[0_0_20px_2px_rgba(59,130,246,0.6)] transition-colors"
+            className="bg-blue-600  text-white font-semibold px-8 py-3 rounded-lg shadow-md"
           >
             Run Health Check
           </button>

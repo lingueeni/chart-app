@@ -1,5 +1,19 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import { Inter, Poppins, Roboto, Oswald } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const poppins = Poppins({
+  weight: ["400", "600"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+});
+const roboto = Roboto({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
+const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
 
 export const metadata = {
   title: "Dashboard",
@@ -12,10 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gradient-to-br from-[#0f1120] via-[#1a1c2c] to-[#0f1120]">
+    <html
+      lang="en"
+      className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${oswald.variable}`}
+    >
+      <body className="min-h-screen bg-[#181523] text-gray-200 font-sans">
         <Navbar />
-        <main className="max-w-7xl mx-auto px-1 py-1">{children}</main>
+        <main className="w-[95%] mx-auto py-4">{children}</main>
       </body>
     </html>
   );
