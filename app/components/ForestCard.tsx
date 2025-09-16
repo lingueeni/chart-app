@@ -12,7 +12,7 @@ interface ForestInfo {
   forestFunctionLevel: string;
   domainFunctionLevel: string;
   schemaVersion: string;
-  recycleBin: boolean;
+  recycleBin: string;
   fsmoRole: string;
   domains: Domain[];
 }
@@ -24,7 +24,7 @@ export default function ForestCard() {
     forestFunctionLevel: "Windows Server 2016",
     domainFunctionLevel: "Windows Server 2016",
     schemaVersion: "87",
-    recycleBin: true,
+    recycleBin: "Enabled",
     fsmoRole: "Schema Master",
     domains: [
       {
@@ -82,7 +82,13 @@ export default function ForestCard() {
                           <td className="font-roboto px-3 py-2 whitespace-nowrap">
                             {domain.name}
                           </td>
-                          <td className="font-roboto px-3 py-2 whitespace-nowrap">
+                          <td
+                            className={`font-roboto px-3 py-2 whitespace-nowrap ${
+                              domain.osVersion === "Windows Server 2012 R2"
+                                ? "text-red-500 font-semibold"
+                                : " font-semibold"
+                            }`}
+                          >
                             {domain.osVersion}
                           </td>
                           <td className="font-roboto px-3 py-2 whitespace-nowrap">
@@ -117,9 +123,7 @@ export default function ForestCard() {
             </tr>
             <tr className="border-b border-gray-700">
               <td className="px-3 py-3 text-gray-400">Recycle Bin</td>
-              <td className="px-3 py-3">
-                {forestData.recycleBin ? "True" : "False"}
-              </td>
+              <td className="px-3 py-3">{forestData.recycleBin}</td>
             </tr>
             <tr>
               <td className="px-3 py-3 text-gray-400">FSMO Role</td>
