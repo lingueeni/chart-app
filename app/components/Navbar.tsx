@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 import "../globals.css";
 
 export default function Navbar() {
@@ -9,20 +10,25 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20); // adjust threshold if needed
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+      });
     };
-    window.addEventListener("scroll", handleScroll);
 
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+    <header
+      className={clsx(
+        "sticky top-0 z-50 transition-all duration-300 shadow-md",
         scrolled
           ? "bg-[#141627]/80 backdrop-blur-md shadow-lg"
-          : "bg-gradient-to-r from-[#141627] to-[#1c1f36] shadow-md"
-      }`}
+          : "bg-gradient-to-r from-[#141627] to-[#1c1f36]"
+      )}
     >
       <div className="w-[90%] mx-auto py-4 flex justify-between items-center">
         <Link
@@ -32,27 +38,22 @@ export default function Navbar() {
           AD X-Ray
         </Link>
 
-        <div className="space-x-8">
-          <Link
-            href="/"
-            className="font-roboto text-gray-300 hover:text-indigo-400 transition-colors font-semibold text-lg"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/reports"
-            className="font-roboto text-gray-300 hover:text-indigo-400 transition-colors font-semibold text-lg"
-          >
-            Reports
-          </Link>
-          <Link
-            href="/settings"
-            className="font-roboto text-gray-300 hover:text-indigo-400 transition-colors font-semibold text-lg"
-          >
-            Settings
-          </Link>
-        </div>
+        <nav className="space-x-8">
+          {[
+            { href: "/", label: "Dashboard" },
+            { href: "/reports", label: "Reports" },
+            { href: "/settings", label: "Settings" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="font-roboto text-gray-300 hover:text-indigo-400 transition-colors font-semibold text-lg"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }
