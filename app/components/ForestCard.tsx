@@ -53,31 +53,29 @@ export default function ForestCard() {
   };
 
   return (
-    <div className="w-full bg-[#221E33] p-6 rounded-xl shadow-md hover:shadow-[0_0_20px_3px_rgba(99,102,241,0.4)] transition-shadow duration-300">
-      <h2 className="font-poppins text-2xl font-bold text-indigo-400 mb-6">
+    <div className="w-full bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+      <h2 className="font-poppins text-2xl font-bold text-[#0078D4] mb-6">
         Forest and Domain Controller Info
       </h2>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full text-base text-gray-300 border-collapse">
+        <table className="min-w-full text-base text-gray-700 border border-gray-200 rounded-lg">
           <tbody>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400 w-1/2">Forest Name</td>
-              <td className="px-3 py-3">{forestData.forestName}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500 w-1/2">Forest Name</td>
+              <td className="px-4 py-3 font-medium">{forestData.forestName}</td>
             </tr>
 
-            {/* Domains table */}
-            <tr className="border-b border-gray-700">
-              <td colSpan={2} className="px-3 py-3">
+            {/* Domains nested table */}
+            <tr className="border-b border-gray-200">
+              <td colSpan={2} className="px-4 py-3">
                 <div className="overflow-x-auto">
-                  <table className="min-w-full text-left text-gray-300 text-sm border-collapse">
+                  <table className="min-w-full text-left text-gray-700 text-sm border border-gray-200 rounded-lg">
                     <thead>
-                      <tr className="bg-[#24283d] text-gray-200">
-                        <th className="font-inter text-sm px-3 py-2">Domain</th>
-                        <th className="font-inter text-sm px-3 py-2">
-                          OS Version
-                        </th>
-                        <th className="font-inter text-sm px-3 py-2">UpTime</th>
+                      <tr className="bg-[#E5F1FB] text-[#004578]">
+                        <th className="px-4 py-2">Domain</th>
+                        <th className="px-4 py-2">OS Version</th>
+                        <th className="px-4 py-2">UpTime</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -85,22 +83,22 @@ export default function ForestCard() {
                         <tr
                           key={i}
                           className={`${
-                            i % 2 === 0 ? "bg-[#1c1f2e]" : "bg-[#141627]"
-                          } hover:bg-indigo-900/30`}
+                            i % 2 === 0 ? "bg-white" : "bg-gray-50"
+                          } hover:bg-[#E5F1FB]/70 transition-colors`}
                         >
-                          <td className="font-roboto px-3 py-2 whitespace-nowrap">
+                          <td className="px-4 py-2 font-medium">
                             {domain.name}
                           </td>
                           <td
-                            className={`font-roboto px-3 py-2 whitespace-nowrap ${
+                            className={`px-4 py-2 ${
                               domain.osVersion === "Windows Server 2012 R2"
                                 ? "text-red-500 font-semibold"
-                                : "font-semibold"
+                                : "font-semibold text-gray-800"
                             }`}
                           >
                             {domain.osVersion}
                           </td>
-                          <td className="font-roboto px-3 py-2 whitespace-nowrap">
+                          <td className="px-4 py-2">
                             {domain.upTime.map((u, j) => {
                               const key = Object.keys(u)[0];
                               return (
@@ -119,45 +117,57 @@ export default function ForestCard() {
             </tr>
 
             {/* Forest info */}
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">Forest Function Level</td>
-              <td className="px-3 py-3">{forestData.forestFunctionLevel}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">Forest Function Level</td>
+              <td className="px-4 py-3 font-medium">
+                {forestData.forestFunctionLevel}
+              </td>
             </tr>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">Domain Function Level</td>
-              <td className="px-3 py-3">{forestData.domainFunctionLevel}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">Domain Function Level</td>
+              <td className="px-4 py-3 font-medium">
+                {forestData.domainFunctionLevel}
+              </td>
             </tr>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">Schema Version</td>
-              <td className="px-3 py-3">{forestData.schemaVersion}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">Schema Version</td>
+              <td className="px-4 py-3 font-medium">
+                {forestData.schemaVersion}
+              </td>
             </tr>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">Recycle Bin</td>
-              <td className="px-3 py-3">{forestData.recycleBin}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">Recycle Bin</td>
+              <td className="px-4 py-3 font-medium">{forestData.recycleBin}</td>
             </tr>
 
             {/* FSMO Roles */}
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">Schema Master</td>
-              <td className="px-3 py-3">{forestData.fsmoRoles.schemaMaster}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">Schema Master</td>
+              <td className="px-4 py-3 font-medium">
+                {forestData.fsmoRoles.schemaMaster}
+              </td>
             </tr>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">Domain Naming Master</td>
-              <td className="px-3 py-3">
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">Domain Naming Master</td>
+              <td className="px-4 py-3 font-medium">
                 {forestData.fsmoRoles.domainNamingMaster}
               </td>
             </tr>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">PDC Emulator</td>
-              <td className="px-3 py-3">{forestData.fsmoRoles.pdcEmulator}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">PDC Emulator</td>
+              <td className="px-4 py-3 font-medium">
+                {forestData.fsmoRoles.pdcEmulator}
+              </td>
             </tr>
-            <tr className="border-b border-gray-700">
-              <td className="px-3 py-3 text-gray-400">RID Master</td>
-              <td className="px-3 py-3">{forestData.fsmoRoles.ridMaster}</td>
+            <tr className="border-b border-gray-200">
+              <td className="px-4 py-3 text-gray-500">RID Master</td>
+              <td className="px-4 py-3 font-medium">
+                {forestData.fsmoRoles.ridMaster}
+              </td>
             </tr>
             <tr>
-              <td className="px-3 py-3 text-gray-400">Infrastructure Master</td>
-              <td className="px-3 py-3">
+              <td className="px-4 py-3 text-gray-500">Infrastructure Master</td>
+              <td className="px-4 py-3 font-medium">
                 {forestData.fsmoRoles.infrastructureMaster}
               </td>
             </tr>

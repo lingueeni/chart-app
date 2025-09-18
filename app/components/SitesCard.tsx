@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
+
 interface Site {
   id: number;
   name: string;
@@ -22,62 +32,44 @@ export default function SitesCard() {
       name: "Branch-Site",
       link: "branch-link",
       replicationTopology: "Hub-Spoke",
-      fsmoCount: 2,
+      fsmoCount: 3,
     },
     {
       id: 3,
       name: "Remote-Site",
       link: "remote-link",
       replicationTopology: "Mesh",
-      fsmoCount: 1,
-    },
-    {
-      id: 4,
-      name: "Test-Site",
-      link: "test-link",
-      replicationTopology: "Ring",
-      fsmoCount: 0,
-    },
-    {
-      id: 5,
-      name: "Lab-Site",
-      link: "lab-link",
-      replicationTopology: "Hub-Spoke",
-      fsmoCount: 3,
-    },
-    {
-      id: 6,
-      name: "DR-Site",
-      link: "dr-link",
-      replicationTopology: "Mesh",
       fsmoCount: 4,
     },
     {
-      id: 7,
+      id: 4,
+      name: "DMZ-Site",
+      link: "dmz-link",
+      replicationTopology: "Star",
+      fsmoCount: 2,
+    },
+    {
+      id: 5,
       name: "Backup-Site",
       link: "backup-link",
-      replicationTopology: "Ring",
-      fsmoCount: 2,
+      replicationTopology: "Tree",
+      fsmoCount: 6,
     },
   ];
 
   return (
-    <div className="w-full bg-[#221E33] p-6 rounded-xl shadow-md hover:shadow-[0_0_20px_3px_rgba(99,102,241,0.4)] transition-shadow duration-300">
-      <h2 className="font-poppins text-2xl font-bold text-indigo-400 mb-6">
+    <div className="w-full bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+      <h2 className="font-poppins text-2xl font-bold text-[#0078D4] mb-6">
         Sites
       </h2>
-
-      {/* Table */}
-      <div className="overflow-x-auto mb-8">
-        <table className="min-w-full text-base text-gray-300 border-collapse">
+      <div className="overflow-x-auto mb-6">
+        <table className="min-w-full text-base text-gray-700 border border-gray-200 rounded-lg">
           <thead>
-            <tr className="bg-[#24283d] text-gray-200">
-              <th className="font-inter px-4 py-3 text-left">Name</th>
-              <th className="font-inter px-4 py-3 text-left">Link</th>
-              <th className="font-inter px-4 py-3 text-left">
-                Replication Topology
-              </th>
-              <th className="font-inter px-4 py-3 text-left">FSMO Holders</th>
+            <tr className="bg-[#E5F1FB] text-[#004578]">
+              <th className="px-4 py-3 text-left">Name</th>
+              <th className="px-4 py-3 text-left">Link</th>
+              <th className="px-4 py-3 text-left">Replication Topology</th>
+              <th className="px-4 py-3 text-left">FSMO Holders</th>
             </tr>
           </thead>
           <tbody>
@@ -85,23 +77,13 @@ export default function SitesCard() {
               <tr
                 key={site.id}
                 className={`${
-                  i % 2 === 0 ? "bg-[#1c1f2e]" : "bg-[#141627]"
-                } hover:bg-indigo-900/30`}
+                  i % 2 === 0 ? "bg-white" : "bg-gray-50"
+                } hover:bg-[#E5F1FB]/70 transition-colors`}
               >
-                <td className="font-roboto px-4 py-3 whitespace-nowrap">
-                  {site.name}
-                </td>
-                <td className="font-roboto px-4 py-3 whitespace-nowrap">
-                  {site.link}
-                </td>
-                <td className="font-roboto px-4 py-3 whitespace-nowrap">
-                  {site.replicationTopology}
-                </td>
-                <td
-                  className={`font-roboto px-4 py-3 whitespace-nowrap font-semibold ${
-                    site.fsmoCount === 0 ? "text-red-500" : "text-indigo-400"
-                  }`}
-                >
+                <td className="px-4 py-3 font-medium">{site.name}</td>
+                <td className="px-4 py-3">{site.link}</td>
+                <td className="px-4 py-3">{site.replicationTopology}</td>
+                <td className="px-4 py-3 font-semibold text-[#0078D4]">
                   {site.fsmoCount}
                 </td>
               </tr>
@@ -109,8 +91,33 @@ export default function SitesCard() {
           </tbody>
         </table>
       </div>
-
-      {/* External Chart Component */}
+      <div className="h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={sites}
+            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
+            <XAxis dataKey="name" stroke="#333" />
+            <YAxis stroke="#333" />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "white",
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+              }}
+              labelStyle={{ color: "#004578", fontWeight: "bold" }}
+              itemStyle={{ color: "#0078D4" }}
+            />
+            <Bar
+              dataKey="fsmoCount"
+              fill="#0078D4"
+              barSize={40}
+              radius={[6, 6, 0, 0]}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

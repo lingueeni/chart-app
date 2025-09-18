@@ -17,7 +17,7 @@ const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
 
 export const metadata = {
   title: "Dashboard",
-  description: "Next.js 15 Dashboard with Tailwind",
+  description: "Next.js 15 Dashboard styled like Microsoft services",
 };
 
 export default function RootLayout({
@@ -30,9 +30,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${oswald.variable}`}
     >
-      <body className="min-h-screen bg-[#181523] text-gray-200 font-sans">
+      <body className="min-h-screen bg-gray-100 text-gray-900 font-sans">
         <Navbar />
-        <main className="w-[95%] mx-auto py-4">{children}</main>
+        <main className="w-[95%] mx-auto py-6">{children}</main>
       </body>
     </html>
   );

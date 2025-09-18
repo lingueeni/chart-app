@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import clsx from "clsx";
 import "../globals.css";
 
 export default function Navbar() {
@@ -22,18 +21,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={clsx(
-        "sticky top-0 z-50 transition-all duration-300 shadow-md",
-        scrolled
-          ? "bg-[#141627]/80 backdrop-blur-md shadow-lg"
-          : "bg-gradient-to-r from-[#141627] to-[#1c1f36]"
-      )}
-    >
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="w-[90%] mx-auto py-4 flex justify-between items-center">
         <Link
           href="/"
-          className="font-oswald text-2xl font-bold text-white hover:text-indigo-400 transition-colors"
+          className="font-oswald text-2xl font-bold text-[#0078D4] hover:text-[#005A9E] transition-colors"
         >
           AD X-Ray
         </Link>
@@ -47,7 +39,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-roboto text-gray-300 hover:text-indigo-400 transition-colors font-semibold text-lg"
+              className="font-roboto text-[#0078D4] hover:text-[#005A9E] transition-colors font-semibold text-lg"
             >
               {link.label}
             </Link>
