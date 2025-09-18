@@ -83,9 +83,7 @@ export default function SitesCard() {
                 <td className="px-4 py-3 font-medium">{site.name}</td>
                 <td className="px-4 py-3">{site.link}</td>
                 <td className="px-4 py-3">{site.replicationTopology}</td>
-                <td className="px-4 py-3 font-semibold text-[#0078D4]">
-                  {site.fsmoCount}
-                </td>
+                <td className="px-4 py-3 font-semibold">{site.fsmoCount}</td>
               </tr>
             ))}
           </tbody>
