@@ -5,6 +5,7 @@ interface Site {
   name: string;
   link: string;
   replicationTopology: string;
+  fsmoCount: number;
 }
 
 export default function SitesCard() {
@@ -14,18 +15,49 @@ export default function SitesCard() {
       name: "HQ-Site",
       link: "hq-link",
       replicationTopology: "Ring",
+      fsmoCount: 5,
     },
     {
       id: 2,
       name: "Branch-Site",
       link: "branch-link",
       replicationTopology: "Hub-Spoke",
+      fsmoCount: 2,
     },
     {
       id: 3,
       name: "Remote-Site",
       link: "remote-link",
       replicationTopology: "Mesh",
+      fsmoCount: 1,
+    },
+    {
+      id: 4,
+      name: "Test-Site",
+      link: "test-link",
+      replicationTopology: "Ring",
+      fsmoCount: 0,
+    },
+    {
+      id: 5,
+      name: "Lab-Site",
+      link: "lab-link",
+      replicationTopology: "Hub-Spoke",
+      fsmoCount: 3,
+    },
+    {
+      id: 6,
+      name: "DR-Site",
+      link: "dr-link",
+      replicationTopology: "Mesh",
+      fsmoCount: 4,
+    },
+    {
+      id: 7,
+      name: "Backup-Site",
+      link: "backup-link",
+      replicationTopology: "Ring",
+      fsmoCount: 2,
     },
   ];
 
@@ -35,7 +67,8 @@ export default function SitesCard() {
         Sites
       </h2>
 
-      <div className="overflow-x-auto">
+      {/* Table */}
+      <div className="overflow-x-auto mb-8">
         <table className="min-w-full text-base text-gray-300 border-collapse">
           <thead>
             <tr className="bg-[#24283d] text-gray-200">
@@ -44,6 +77,7 @@ export default function SitesCard() {
               <th className="font-inter px-4 py-3 text-left">
                 Replication Topology
               </th>
+              <th className="font-inter px-4 py-3 text-left">FSMO Holders</th>
             </tr>
           </thead>
           <tbody>
@@ -63,11 +97,20 @@ export default function SitesCard() {
                 <td className="font-roboto px-4 py-3 whitespace-nowrap">
                   {site.replicationTopology}
                 </td>
+                <td
+                  className={`font-roboto px-4 py-3 whitespace-nowrap font-semibold ${
+                    site.fsmoCount === 0 ? "text-red-500" : "text-indigo-400"
+                  }`}
+                >
+                  {site.fsmoCount}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* External Chart Component */}
     </div>
   );
 }
