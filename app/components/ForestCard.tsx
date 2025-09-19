@@ -53,14 +53,16 @@ export default function ForestCard() {
   };
 
   return (
-    <div className="w-full bg-orange/10 p-6 rounded-xl shadow-md hover:shadow-[0_0_20px_3px_rgba(248,104,40,0.3)] transition-shadow duration-300">
-      <h2 className="font-poppins text-2xl font-bold text-[#0078D4] mb-6">
+    <div className="w-full bg-white p-6 rounded-xl shadow-md border border-gray-200">
+      {/* Title */}
+      <h2 className="font-poppins text-2xl font-bold text-[#00A4EF] mb-6">
         Forest and Domain Controller Info
       </h2>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full text-base text-gray-700 border border-gray-200 rounded-lg">
+        <table className="min-w-full text-base text-gray-800 border border-gray-200 rounded-lg">
           <tbody>
+            {/* Forest Name */}
             <tr className="border-b border-gray-200">
               <td className="px-4 py-3 text-gray-500 w-1/2">Forest Name</td>
               <td className="px-4 py-3 font-medium">{forestData.forestName}</td>
@@ -70,9 +72,9 @@ export default function ForestCard() {
             <tr className="border-b border-gray-200">
               <td colSpan={2} className="px-4 py-3">
                 <div className="overflow-x-auto">
-                  <table className="min-w-full text-left text-gray-700 text-sm border border-gray-200 rounded-lg">
+                  <table className="min-w-full text-left text-sm border border-gray-200 rounded-lg">
                     <thead>
-                      <tr className="bg-[#E5F1FB] text-[#004578]">
+                      <tr className="bg-[#00A4EF]/10 text-[#004578]">
                         <th className="px-4 py-2">Domain</th>
                         <th className="px-4 py-2">OS Version</th>
                         <th className="px-4 py-2">UpTime</th>
@@ -83,12 +85,22 @@ export default function ForestCard() {
                         <tr
                           key={i}
                           className={`${
-                            i % 2 === 0 ? "bg-yellow/10" : "bg-green/10"
-                          } hover:bg-orange/20 transition-colors`}
+                            i % 2 === 0 ? "bg-[#FFB900]/10" : "bg-[#7FBA00]/10"
+                          } hover:bg-[#F25022]/10 transition-colors`}
                         >
-                          <td className="px-3 py-2">{domain.name}</td>
-                          <td className="px-3 py-2">{domain.osVersion}</td>
-                          <td className="px-3 py-2">
+                          <td className="px-3 py-2 font-medium">
+                            {domain.name}
+                          </td>
+                          <td
+                            className={`px-3 py-2 font-medium ${
+                              domain.osVersion.includes("2012")
+                                ? "text-[#F25022]"
+                                : "text-[#1F2937]"
+                            }`}
+                          >
+                            {domain.osVersion}
+                          </td>
+                          <td className="px-3 py-2 text-gray-700">
                             {domain.upTime.map((u, j) => {
                               const key = Object.keys(u)[0];
                               return (
@@ -109,13 +121,13 @@ export default function ForestCard() {
             {/* Forest info */}
             <tr className="border-b border-gray-200">
               <td className="px-4 py-3 text-gray-500">Forest Function Level</td>
-              <td className="px-4 py-3 font-medium">
+              <td className="px-4 py-3 font-medium ">
                 {forestData.forestFunctionLevel}
               </td>
             </tr>
             <tr className="border-b border-gray-200">
               <td className="px-4 py-3 text-gray-500">Domain Function Level</td>
-              <td className="px-4 py-3 font-medium">
+              <td className="px-4 py-3 font-medium ">
                 {forestData.domainFunctionLevel}
               </td>
             </tr>
@@ -127,7 +139,9 @@ export default function ForestCard() {
             </tr>
             <tr className="border-b border-gray-200">
               <td className="px-4 py-3 text-gray-500">Recycle Bin</td>
-              <td className="px-4 py-3 font-medium">{forestData.recycleBin}</td>
+              <td className="px-4 py-3 font-medium ">
+                {forestData.recycleBin}
+              </td>
             </tr>
 
             {/* FSMO Roles */}
@@ -145,19 +159,19 @@ export default function ForestCard() {
             </tr>
             <tr className="border-b border-gray-200">
               <td className="px-4 py-3 text-gray-500">PDC Emulator</td>
-              <td className="px-4 py-3 font-medium">
+              <td className="px-4 py-3 font-medium ">
                 {forestData.fsmoRoles.pdcEmulator}
               </td>
             </tr>
             <tr className="border-b border-gray-200">
               <td className="px-4 py-3 text-gray-500">RID Master</td>
-              <td className="px-4 py-3 font-medium">
+              <td className="px-4 py-3 font-medium ">
                 {forestData.fsmoRoles.ridMaster}
               </td>
             </tr>
             <tr>
               <td className="px-4 py-3 text-gray-500">Infrastructure Master</td>
-              <td className="px-4 py-3 font-medium">
+              <td className="px-4 py-3 font-medium ">
                 {forestData.fsmoRoles.infrastructureMaster}
               </td>
             </tr>

@@ -15,31 +15,47 @@ export default function Navbar() {
     };
 
     handleScroll();
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-cyan/8 border-b border-gray-200 shadow-sm">
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "bg-white border-b border-gray-200 shadow-md"
+          : "bg-[#00B6F1]" // Windows blue
+      }`}
+    >
       <div className="w-[90%] mx-auto py-4 flex justify-between items-center">
+        {/* Logo */}
         <Link
           href="/"
-          className="font-oswald text-2xl font-bold text-[#0078D4] hover:text-[#005A9E] transition-colors"
+          className={`font-oswald text-2xl font-bold transition-colors ${
+            scrolled ? "text-[#00B6F1]" : "text-white hover:text-[#004578]"
+          }`}
         >
           AD X-Ray
         </Link>
 
+        {/* Nav Links */}
         <nav className="space-x-8">
           {[
-            { href: "/", label: "Dashboard" },
-            { href: "/reports", label: "Reports" },
-            { href: "/settings", label: "Settings" },
+            { href: "/", label: "Dashboard", color: "#F86828" }, // Orange
+            { href: "/reports", label: "Reports", color: "#92C400" }, // Green
+            { href: "/settings", label: "Settings", color: "#FFC400" }, // Yellow
           ].map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-roboto text-[#0078D4] hover:text-[#005A9E] transition-colors font-semibold text-lg"
+              className={`font-roboto font-semibold text-lg transition-colors ${
+                scrolled ? "text-gray-800 hover:opacity-70" : "text-white"
+              }`}
+              style={{
+                textDecorationColor: link.color,
+                textDecorationThickness: "3px",
+                textUnderlineOffset: "6px",
+              }}
             >
               {link.label}
             </Link>

@@ -4,15 +4,18 @@ import SitesCard from "./components/SitesCard";
 
 export default async function LandingPage() {
   return (
-    <div className="min-h-screen bg-cyan/9 text-gray-200 px-2 py-2">
-      <div className="max-w-screen-2xl mx-auto space-y-8 px-4">
+    <main className="min-h-screen bg-[#F3F6FA] text-gray-800">
+      {/* Page Wrapper */}
+      <div className="max-w-screen-2xl mx-auto px-4 py-6 space-y-8">
+        {/* Page Header */}
         <PageHeader />
 
-        <div className="grid grid-cols-1 gap-6">
+        {/* Dashboard Content */}
+        <section className="grid grid-cols-1 gap-6">
           <ForestCard />
           <SitesCard />
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
