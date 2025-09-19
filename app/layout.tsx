@@ -30,7 +30,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${poppins.variable} ${roboto.variable} ${oswald.variable}`}
     >
-      <body className="min-h-screen bg-gray-100 text-gray-900 font-sans">
+      <body className="min-h-screen bg-cyan/5 text-gray-900 font-sans">
         <Navbar />
         <main className="w-[95%] mx-auto py-6">{children}</main>
       </body>

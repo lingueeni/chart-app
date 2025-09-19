@@ -20,7 +20,7 @@ export default function HealthForm() {
   };
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-green/10 p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
       <h2 className="text-2xl font-bold text-[#0078D4] mb-6">
         Enter Domain Information
       </h2>

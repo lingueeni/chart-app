@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --orange: #f86828;
+  --green: #92c400;
+  --yellow: #ffc400;
+  --cyan: #00b6f1;
+}
+
+body {
+  background-color: var(--cyan); /* or whichever base color you want */
+  color: var(--orange); /* default text color */
+}

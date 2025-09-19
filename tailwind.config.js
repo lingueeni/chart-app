@@ -13,6 +13,12 @@ module.exports = {
         poppins: ["var(--font-poppins)", "sans-serif"],
         roboto: ["var(--font-roboto)", "sans-serif"],
       },
+      colors: {
+        orange: "#F86828",
+        green: "#92C400",
+        yellow: "#FFC400",
+        cyan: "#00B6F1",
+      },
     },
   },
   plugins: [],

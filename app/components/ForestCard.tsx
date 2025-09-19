@@ -53,7 +53,7 @@ export default function ForestCard() {
   };
 
   return (
-    <div className="w-full bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="w-full bg-orange/10 p-6 rounded-xl shadow-md hover:shadow-[0_0_20px_3px_rgba(248,104,40,0.3)] transition-shadow duration-300">
       <h2 className="font-poppins text-2xl font-bold text-[#0078D4] mb-6">
         Forest and Domain Controller Info
       </h2>
@@ -83,22 +83,12 @@ export default function ForestCard() {
                         <tr
                           key={i}
                           className={`${
-                            i % 2 === 0 ? "bg-white" : "bg-gray-50"
-                          } hover:bg-[#E5F1FB]/70 transition-colors`}
+                            i % 2 === 0 ? "bg-yellow/10" : "bg-green/10"
+                          } hover:bg-orange/20 transition-colors`}
                         >
-                          <td className="px-4 py-2 font-medium">
-                            {domain.name}
-                          </td>
-                          <td
-                            className={`px-4 py-2 ${
-                              domain.osVersion === "Windows Server 2012 R2"
-                                ? "text-red-500 font-semibold"
-                                : "font-semibold text-gray-800"
-                            }`}
-                          >
-                            {domain.osVersion}
-                          </td>
-                          <td className="px-4 py-2">
+                          <td className="px-3 py-2">{domain.name}</td>
+                          <td className="px-3 py-2">{domain.osVersion}</td>
+                          <td className="px-3 py-2">
                             {domain.upTime.map((u, j) => {
                               const key = Object.keys(u)[0];
                               return (

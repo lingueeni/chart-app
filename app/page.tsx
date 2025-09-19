@@ -4,7 +4,7 @@ import SitesCard from "./components/SitesCard";
 
 export default async function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-gray-200 px-2 py-2">
+    <div className="min-h-screen bg-cyan/9 text-gray-200 px-2 py-2">
       <div className="max-w-screen-2xl mx-auto space-y-8 px-4">
         <PageHeader />
 

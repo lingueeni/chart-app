@@ -58,7 +58,7 @@ export default function SitesCard() {
   ];
 
   return (
-    <div className="w-full bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="w-full bg-yellow/10 p-6 rounded-xl shadow-md hover:shadow-[0_0_20px_3px_rgba(248,104,40,0.3)] transition-shadow duration-300">
       <h2 className="font-poppins text-2xl font-bold text-[#0078D4] mb-6">
         Sites
       </h2>
@@ -77,8 +77,8 @@ export default function SitesCard() {
               <tr
                 key={site.id}
                 className={`${
-                  i % 2 === 0 ? "bg-white" : "bg-gray-50"
-                } hover:bg-[#E5F1FB]/70 transition-colors`}
+                  i % 2 === 0 ? "bg-yellow/10" : "bg-green/10"
+                } hover:bg-orange/20 transition-colors`}
               >
                 <td className="px-4 py-3 font-medium">{site.name}</td>
                 <td className="px-4 py-3">{site.link}</td>
@@ -96,22 +96,34 @@ export default function SitesCard() {
             margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
-            <XAxis dataKey="name" stroke="#333" />
-            <YAxis stroke="#333" />
+            <XAxis dataKey="name" stroke="#00B6F1" />
+            <YAxis stroke="#00B6F1" />
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #ccc",
+                backgroundColor: "#FFC400", // yellow background
+                border: "1px solid #00B6F1", // cyan border
                 borderRadius: "8px",
+                color: "#004578",
               }}
-              labelStyle={{ color: "#004578", fontWeight: "bold" }}
-              itemStyle={{ color: "#0078D4" }}
+              labelStyle={{
+                color: "#92C400", // green label text
+                fontWeight: "bold",
+              }}
+              itemStyle={{
+                color: "#F86828", // orange items
+                fontWeight: "500",
+              }}
             />
             <Bar
               dataKey="fsmoCount"
-              fill="#0078D4"
+              fill="#F86828"
               barSize={40}
               radius={[6, 6, 0, 0]}
+              activeBar={{
+                fill: "#92C400", // green hover
+                stroke: "#00B6F1", // cyan border
+                strokeWidth: 2,
+              }}
             />
           </BarChart>
         </ResponsiveContainer>
