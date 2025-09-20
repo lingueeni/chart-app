@@ -4,26 +4,26 @@ export default function StatCards() {
   const stats = [
     {
       id: 1,
-      label: "Domains",
-      value: "12",
+      label: "Total Sites",
+      value: "5",
       color: "#005a9e", // blue
     },
     {
       id: 2,
-      label: "Sites",
-      value: "8",
+      label: "Domain Controllers",
+      value: "4",
       color: "#107C10", // green
     },
     {
       id: 3,
-      label: "Servers",
-      value: "24",
+      label: "Schema Version",
+      value: "87",
       color: "#FFB900", // yellow
     },
     {
       id: 4,
-      label: "Users",
-      value: "320",
+      label: "Total Findings",
+      value: "20",
       color: "#D13438", // red
     },
   ];

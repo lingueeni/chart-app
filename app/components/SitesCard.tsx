@@ -29,8 +29,8 @@ export default function SitesCard() {
       link: "hq-link",
       replicationTopology: "Ring",
       fsmoCount: 5,
-      gradientFrom: "#0078d4", // blue
-      gradientTo: "#4dabf7",
+      gradientTo: "#0078d4", // blue
+      gradientFrom: "#4dabf7",
     },
     {
       id: 2,
@@ -38,8 +38,8 @@ export default function SitesCard() {
       link: "branch-link",
       replicationTopology: "Hub-Spoke",
       fsmoCount: 3,
-      gradientFrom: "#d13438", // red
-      gradientTo: "#ff8a80",
+      gradientTo: "#d13438", // red
+      gradientFrom: "#ff8a80",
     },
     {
       id: 3,
@@ -47,8 +47,8 @@ export default function SitesCard() {
       link: "remote-link",
       replicationTopology: "Mesh",
       fsmoCount: 4,
-      gradientFrom: "#40e0d0", // turquoise
-      gradientTo: "#4dabf7",
+      gradientTo: "#008080", // turquoise
+      gradientFrom: "#36DECE",
     },
     {
       id: 4,
@@ -56,8 +56,8 @@ export default function SitesCard() {
       link: "dmz-link",
       replicationTopology: "Star",
       fsmoCount: 2,
-      gradientFrom: "#ff8c00", // orange
-      gradientTo: "#ffd43b",
+      gradientTo: "#ff8c00", // orange
+      gradientFrom: "#ffd43b",
     },
     {
       id: 5,

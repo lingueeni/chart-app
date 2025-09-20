@@ -4,6 +4,7 @@ import SitesCard from "./components/SitesCard";
 import InstalledRolesCard from "./components/InstalledRolesCard";
 import GeneralHealthCard from "./components/GeneralHealthCard";
 import StatCards from "./components/headercards";
+import SecurityPrivilegedCard from "./components/SecurityPrivilegedCard";
 
 export default async function LandingPage() {
   return (
@@ -16,6 +17,7 @@ export default async function LandingPage() {
           <SitesCard />
           <InstalledRolesCard />
           <GeneralHealthCard />
+          <SecurityPrivilegedCard />
         </section>
       </div>
     </main>
