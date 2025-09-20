@@ -28,7 +28,6 @@ export default function Navbar() {
       }`}
     >
       <div className="w-[90%] mx-auto py-4 flex justify-between items-center">
-        {/* Logo */}
         <Link
           href="/"
           className={`font-oswald text-2xl font-bold transition-colors ${

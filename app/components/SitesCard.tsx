@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
+  Cell,
 } from "recharts";
 
 interface Site {
@@ -16,6 +17,8 @@ interface Site {
   link: string;
   replicationTopology: string;
   fsmoCount: number;
+  gradientFrom: string;
+  gradientTo: string;
 }
 
 export default function SitesCard() {
@@ -26,6 +29,8 @@ export default function SitesCard() {
       link: "hq-link",
       replicationTopology: "Ring",
       fsmoCount: 5,
+      gradientFrom: "#0078d4", // blue
+      gradientTo: "#4dabf7",
     },
     {
       id: 2,
@@ -33,6 +38,8 @@ export default function SitesCard() {
       link: "branch-link",
       replicationTopology: "Hub-Spoke",
       fsmoCount: 3,
+      gradientFrom: "#d13438", // red
+      gradientTo: "#ff8a80",
     },
     {
       id: 3,
@@ -40,6 +47,8 @@ export default function SitesCard() {
       link: "remote-link",
       replicationTopology: "Mesh",
       fsmoCount: 4,
+      gradientFrom: "#40e0d0", // turquoise
+      gradientTo: "#4dabf7",
     },
     {
       id: 4,
@@ -47,6 +56,8 @@ export default function SitesCard() {
       link: "dmz-link",
       replicationTopology: "Star",
       fsmoCount: 2,
+      gradientFrom: "#ff8c00", // orange
+      gradientTo: "#ffd43b",
     },
     {
       id: 5,
@@ -54,88 +65,144 @@ export default function SitesCard() {
       link: "backup-link",
       replicationTopology: "Tree",
       fsmoCount: 6,
+      gradientFrom: "#ffb900", // yellow
+      gradientTo: "#ffd43b",
     },
   ];
 
   return (
-    <div className="w-full bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:shadow-[0_0_25px_3px_rgba(0,182,241,0.2)] transition-shadow duration-300">
-      {/* Title */}
-      <h2 className="font-poppins text-2xl font-bold text-[#00B6F1] mb-6">
-        Sites
-      </h2>
-
-      {/* Table */}
-      <div className="overflow-x-auto mb-6">
-        <table className="min-w-full text-base text-gray-700 border border-[#00B6F1]/30 rounded-lg overflow-hidden">
-          <thead>
-            <tr className="bg-[#00B6F1]/10 text-[#004578] uppercase tracking-wide text-sm">
-              <th className="px-4 py-3 text-left">Name</th>
-              <th className="px-4 py-3 text-left">Link</th>
-              <th className="px-4 py-3 text-left">Replication Topology</th>
-              <th className="px-4 py-3 text-left">FSMO Holders</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sites.map((site, i) => (
-              <tr
-                key={site.id}
-                className={`${
-                  i % 2 === 0 ? "bg-[#92C400]/10" : "bg-[#FFC400]/10"
-                } hover:bg-[#F86828]/20 transition-colors`}
-              >
-                <td className="px-4 py-3 font-semibold text-[#00B6F1]">
-                  {site.name}
-                </td>
-                <td className="px-4 py-3">{site.link}</td>
-                <td className="px-4 py-3">{site.replicationTopology}</td>
-                <td className="px-4 py-3 font-bold text-[#F86828]">
-                  {site.fsmoCount}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+      <div className="relative px-6 py-4 border-b border-gray-200">
+        <h3 className="text-2xl font-semibold text-gray-900">Sites</h3>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0078D4] via-[#107C10] to-[#FFB900]" />
       </div>
 
-      {/* Chart */}
-      <div className="h-80">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={sites}
-            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
-            <XAxis dataKey="name" stroke="#004578" />
-            <YAxis stroke="#004578" />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #00B6F1",
-                borderRadius: "8px",
-                color: "#004578",
-              }}
-              labelStyle={{
-                color: "#92C400",
-                fontWeight: "bold",
-              }}
-              itemStyle={{
-                color: "#F86828",
-                fontWeight: "500",
-              }}
-            />
-            <Bar
-              dataKey="fsmoCount"
-              fill="#F86828" // orange default
-              barSize={40}
-              radius={[6, 6, 0, 0]}
-              activeBar={{
-                fill: "#92C400", // green hover
-                stroke: "#00B6F1", // cyan border
-                strokeWidth: 2,
-              }}
-            />
-          </BarChart>
-        </ResponsiveContainer>
+      <div className="p-6">
+        {/* Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-m">
+            <thead>
+              <tr className="bg-gray-50 text-gray-600 uppercase">
+                <th className="px-6 py-3 text-left font-semibold">Name</th>
+                <th className="px-6 py-3 text-left font-semibold">Link</th>
+                <th className="px-6 py-3 text-left font-semibold">
+                  Replication Topology
+                </th>
+                <th className="px-6 py-3 text-left font-semibold">
+                  FSMO Holders
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {sites.map((site) => (
+                <tr key={site.id} className="hover:bg-gray-50 transition">
+                  <td className="px-6 py-4 font-medium text-gray-900 flex items-center">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full mr-3"
+                      style={{
+                        background: `linear-gradient(135deg, ${site.gradientFrom}, ${site.gradientTo})`,
+                      }}
+                    />
+                    {site.name}
+                  </td>
+                  <td className="px-6 py-4 text-gray-700">{site.link}</td>
+                  <td className="px-6 py-4 text-gray-700">
+                    {site.replicationTopology}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span
+                      className="inline-block px-3 py-1 rounded-full text-white text-xs font-semibold shadow-sm"
+                      style={{
+                        background: `linear-gradient(135deg, ${site.gradientFrom}, ${site.gradientTo})`,
+                      }}
+                    >
+                      {site.fsmoCount}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Chart */}
+        <div className="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-xl">
+          <div className="flex justify-between items-center mb-6">
+            <h4 className="text-base font-semibold text-gray-900">
+              FSMO Holders Distribution
+            </h4>
+            <div className="flex gap-4 text-xs text-gray-600">
+              {sites.map((s) => (
+                <div key={s.id} className="flex items-center gap-1">
+                  <span
+                    className="w-3 h-3 rounded-sm"
+                    style={{
+                      background: `linear-gradient(135deg, ${s.gradientFrom}, ${s.gradientTo})`,
+                    }}
+                  />
+                  {s.name.split("-")[0]}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={sites}
+                margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+              >
+                <defs>
+                  {sites.map((site) => (
+                    <linearGradient
+                      key={site.id}
+                      id={`colorGradient-${site.id}`}
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor={site.gradientFrom}
+                        stopOpacity={1}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor={site.gradientTo}
+                        stopOpacity={1}
+                      />
+                    </linearGradient>
+                  ))}
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis
+                  dataKey="name"
+                  stroke="#404040"
+                  fontSize={12}
+                  tickMargin={10}
+                />
+                <YAxis stroke="#404040" fontSize={12} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #ddd",
+                    borderRadius: "8px",
+                  }}
+                  labelStyle={{ color: "#0078D4", fontWeight: "bold" }}
+                />
+                <Bar dataKey="fsmoCount" barSize={40} radius={[6, 6, 0, 0]}>
+                  {sites.map((entry) => (
+                    <Cell
+                      key={`cell-${entry.id}`}
+                      fill={`url(#colorGradient-${entry.id})`}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
     </div>
   );
