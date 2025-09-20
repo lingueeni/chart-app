@@ -28,17 +28,27 @@ export default function Navbar() {
       }`}
     >
       <div className="w-[90%] mx-auto py-4 flex justify-between items-center">
-        <Link
-          href="/"
-          className={`font-oswald text-2xl font-bold transition-colors ${
-            scrolled ? "text-[#00B6F1]" : "text-white hover:text-[#004578]"
-          }`}
-        >
-          AD X-Ray
+        {/* Logo + Brand */}
+        <Link href="/" className="flex items-center space-x-2">
+          {/* Windows Logo */}
+          <div className="w-8 h-8 grid grid-cols-2 grid-rows-2 gap-[2px] rounded-md overflow-hidden">
+            <div className="bg-[#0078D4]" />
+            <div className="bg-[#107C10]" />
+            <div className="bg-[#FFB900]" />
+            <div className="bg-[#D13438]" />
+          </div>
+
+          <span
+            className={`font-oswald text-2xl font-bold transition-colors ${
+              scrolled ? "text-[#00B6F1]" : "text-white hover:text-[#004578]"
+            }`}
+          >
+            AD X-Ray
+          </span>
         </Link>
 
         {/* Nav Links */}
-        <nav className="space-x-8">
+        <nav className="flex space-x-10">
           {[
             { href: "/", label: "Dashboard", color: "#F86828" }, // Orange
             { href: "/reports", label: "Reports", color: "#92C400" }, // Green
@@ -47,7 +57,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`font-roboto font-semibold text-lg transition-colors ${
+              className={`relative px-2 font-roboto font-semibold text-lg transition-colors ${
                 scrolled ? "text-gray-800 hover:opacity-70" : "text-white"
               }`}
               style={{
