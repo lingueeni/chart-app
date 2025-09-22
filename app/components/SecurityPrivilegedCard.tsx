@@ -143,8 +143,8 @@ export default function SecurityPrivilegedCard() {
                   x2="0"
                   y2="1"
                 >
-                  <stop offset="5%" stopColor="#FFB900" stopOpacity={0.9} />
-                  <stop offset="95%" stopColor="#FFC83D" stopOpacity={0.7} />
+                  <stop offset="5%" stopColor="#FFC83D" stopOpacity={0.9} />
+                  <stop offset="95%" stopColor="#FFB900" stopOpacity={0.7} />
                 </linearGradient>
               </defs>
 
@@ -152,13 +152,25 @@ export default function SecurityPrivilegedCard() {
               <YAxis tick={{ fill: "#004578" }} />
               <Tooltip />
               <Legend />
+
+              {/* Bars with conditional gradient */}
               <Bar
                 dataKey="count"
                 radius={[8, 8, 0, 0]}
                 barSize={60}
-                fill="url(#userGradient)"
                 name="Accounts"
-              />
+              >
+                {passwordNeverExpire.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      index === 0
+                        ? "url(#userGradient)"
+                        : "url(#computerGradient)"
+                    }
+                  />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -170,6 +182,7 @@ export default function SecurityPrivilegedCard() {
           📴 Disabled Accounts
         </h3>
         <div className="grid grid-cols-2 gap-4">
+          {/* Users Pie */}
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 text-center">
             <h4 className="font-semibold text-[#004578] mb-2">Users</h4>
             <ResponsiveContainer width="100%" height={200}>
@@ -183,17 +196,17 @@ export default function SecurityPrivilegedCard() {
                   outerRadius={70}
                   label
                 >
-                  {userPieData.map((entry, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                  ))}
+                  <Cell fill="#0078D7" /> {/* Active Users */}
+                  <Cell fill="#FFB900" /> {/* Inactive Users */}
                 </Pie>
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
+          {/* Computers Pie */}
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 text-center">
-            <h4 className="font-semibold text-[#004578] mb-2">Computer</h4>
+            <h4 className="font-semibold text-[#004578] mb-2">Computers</h4>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
@@ -205,9 +218,8 @@ export default function SecurityPrivilegedCard() {
                   outerRadius={70}
                   label
                 >
-                  {computerPieData.map((entry, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                  ))}
+                  <Cell fill="#28A745" /> {/* Active Computers */}
+                  <Cell fill="#DC3545" /> {/* Inactive Computers */}
                 </Pie>
                 <Tooltip />
               </PieChart>
