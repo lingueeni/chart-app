@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -12,7 +12,6 @@ import {
 } from "recharts";
 
 export default function SecurityPrivilegedCard() {
-  // Dummy data
   const privilegedGroups = [
     { group: "Domain Admins", members: ["Admin1", "Admin2"] },
     { group: "Enterprise Admins", members: ["Admin3"] },
@@ -20,25 +19,21 @@ export default function SecurityPrivilegedCard() {
   ];
 
   const passwordNeverExpire = [
-    { name: "Jan", user: 5, computer: 2 },
-    { name: "Feb", user: 8, computer: 3 },
-    { name: "Mar", user: 6, computer: 4 },
-    { name: "Apr", user: 10, computer: 5 },
+    { category: "User Accounts", count: 15 },
+    { category: "Computer Accounts", count: 8 },
   ];
 
   const inactiveAccounts = [
-    { type: "Inactive Users", count: 12 },
-    { type: "Inactive Computers", count: 7 },
+    { type: "Inactive Users Accounts", count: 12 },
+    { type: "Inactive Computers Accounts", count: 7 },
   ];
 
   return (
     <div className="bg-[#F3F9FF] shadow-md rounded-xl border border-[#004578]/20 p-6">
-      {/* Main Title */}
       <h2 className="text-xl font-bold text-[#004578] mb-6">
         🔐 Security / Privileged
       </h2>
 
-      {/* 1️⃣ Privileged Groups */}
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-[#004578] mb-3">
           👥 Privileged Groups & Members
@@ -63,27 +58,24 @@ export default function SecurityPrivilegedCard() {
         </div>
       </div>
 
-      {/* 2️⃣ Users with Passwords Never Expire */}
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-[#004578] mb-3">
           🔑 Users with Passwords Never Expire
         </h3>
         <div className="h-64 bg-white rounded-lg border border-gray-200 p-3">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={passwordNeverExpire}>
+            <BarChart data={passwordNeverExpire}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="category" />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="user" stroke="#0078D7" />
-              <Line type="monotone" dataKey="computer" stroke="#FFB900" />
-            </LineChart>
+              <Bar dataKey="count" fill="#0078D7" />
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      {/* 3️⃣ Inactive Accounts */}
       <div>
         <h3 className="text-lg font-semibold text-[#004578] mb-3">
           📴 Inactive Accounts
