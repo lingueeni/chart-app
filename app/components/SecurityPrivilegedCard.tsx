@@ -133,8 +133,8 @@ export default function SecurityPrivilegedCard() {
               {/* Gradient defs */}
               <defs>
                 <linearGradient id="userGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0078D7" stopOpacity={0.9} />
-                  <stop offset="95%" stopColor="#00A4EF" stopOpacity={0.7} />
+                  <stop offset="5%" stopColor="#00A4EF" stopOpacity={0.9} />
+                  <stop offset="95%" stopColor="#0078D7" stopOpacity={0.7} />
                 </linearGradient>
                 <linearGradient
                   id="computerGradient"
@@ -167,13 +167,11 @@ export default function SecurityPrivilegedCard() {
       {/* 3️⃣ Inactive Accounts */}
       <div>
         <h3 className="text-lg font-semibold text-[#004578] mb-3">
-          📴 Inactive Accounts
+          📴 Disabled Accounts
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 text-center">
-            <h4 className="font-semibold text-[#004578] mb-2">
-              Users Accounts
-            </h4>
+            <h4 className="font-semibold text-[#004578] mb-2">Users</h4>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
@@ -195,9 +193,7 @@ export default function SecurityPrivilegedCard() {
           </div>
 
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 text-center">
-            <h4 className="font-semibold text-[#004578] mb-2">
-              Computer Accounts
-            </h4>
+            <h4 className="font-semibold text-[#004578] mb-2">Computer</h4>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie

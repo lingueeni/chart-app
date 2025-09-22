@@ -65,8 +65,8 @@ export default function SitesCard() {
       link: "backup-link",
       replicationTopology: "Tree",
       fsmoCount: 6,
-      gradientFrom: "#ffb900", // yellow
-      gradientTo: "#ffd43b",
+      gradientFrom: "#ffd43b", // yellow
+      gradientTo: "#ffb900",
     },
   ];
 
