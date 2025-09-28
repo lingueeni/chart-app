@@ -8,9 +8,6 @@ export default function ReportsPage() {
           📊 Reports
         </h1>
       </header>
-      <div className="mt-4">
-        <HealthForm />
-      </div>
     </section>
   );
 }
