@@ -66,8 +66,6 @@ export default function SecurityPrivilegedCard() {
     { name: "Inactive", value: inactiveAccounts.computers.inactive },
   ];
 
-  const COLORS = ["#0078D7", "#FFB900"];
-
   return (
     <div className="bg-[#F3F9FF] shadow-md rounded-xl border border-[#004578]/20 p-6">
       {/* Main Title */}

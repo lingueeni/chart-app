@@ -45,7 +45,7 @@ export default function RootLayout({
 
         {/* Footer */}
         <footer className="w-full py-4 bg-gray-100 text-center text-sm text-gray-500 border-t">
-          © {new Date().getFullYear()} AD X-Ray · Built with Next.js
+          © {new Date().getFullYear()} AD X-Ray
         </footer>
       </body>
     </html>

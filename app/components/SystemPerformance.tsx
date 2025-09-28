@@ -34,8 +34,9 @@ export default function SystemPerformance() {
       adapters: [{ id: 4, name: "Ethernet0", enabled: true }],
     },
   ];
+
   return (
-    <div className="bg-white/10 p-6 rounded-xl  md:col-span-2">
+    <div className="bg-white/10 p-6 rounded-xl md:col-span-2 w-full">
       <h3 className="font-poppins text-xl font-bold text-black mb-6">
         🖥️ System Performance
       </h3>
@@ -49,12 +50,14 @@ export default function SystemPerformance() {
                 {
                   name: "Used",
                   value: domain.performance.cpu,
-                  color: "#F25022",
+                  gradientFrom: "#ff8a80",
+                  gradientTo: "#d13438",
                 },
                 {
                   name: "Free",
                   value: 100 - domain.performance.cpu,
-                  color: "#E5E7EB",
+                  gradientFrom: "#e5e7eb",
+                  gradientTo: "#cbd5e1",
                 },
               ],
             },
@@ -64,12 +67,14 @@ export default function SystemPerformance() {
                 {
                   name: "Used",
                   value: domain.performance.memory,
-                  color: "#7FBA00",
+                  gradientFrom: "#36DECE",
+                  gradientTo: "#008080",
                 },
                 {
                   name: "Free",
                   value: 100 - domain.performance.memory,
-                  color: "#E5E7EB",
+                  gradientFrom: "#e5e7eb",
+                  gradientTo: "#cbd5e1",
                 },
               ],
             },
@@ -79,12 +84,14 @@ export default function SystemPerformance() {
                 {
                   name: "Used",
                   value: domain.performance.disk,
-                  color: "#0078D4",
+                  gradientFrom: "#4dabf7",
+                  gradientTo: "#0078d4",
                 },
                 {
                   name: "Free",
                   value: 100 - domain.performance.disk,
-                  color: "#E5E7EB",
+                  gradientFrom: "#e5e7eb",
+                  gradientTo: "#cbd5e1",
                 },
               ],
             },
@@ -106,6 +113,30 @@ export default function SystemPerformance() {
                     <div className="h-32 w-full">
                       <ResponsiveContainer>
                         <PieChart>
+                          <defs>
+                            {chart.data.map((entry, i) => (
+                              <linearGradient
+                                key={`grad-${idx2}-${i}`}
+                                id={`grad-${idx2}-${i}`}
+                                x1="0"
+                                y1="0"
+                                x2="1"
+                                y2="1"
+                              >
+                                <stop
+                                  offset="5%"
+                                  stopColor={entry.gradientFrom}
+                                  stopOpacity={1}
+                                />
+                                <stop
+                                  offset="95%"
+                                  stopColor={entry.gradientTo}
+                                  stopOpacity={1}
+                                />
+                              </linearGradient>
+                            ))}
+                          </defs>
+
                           <Pie
                             data={chart.data}
                             dataKey="value"
@@ -119,13 +150,14 @@ export default function SystemPerformance() {
                           >
                             {chart.data.map((entry, i) => (
                               <Cell
-                                key={`cell-${i}`}
-                                fill={entry.color}
+                                key={`cell-${idx2}-${i}`}
+                                fill={`url(#grad-${idx2}-${i})`}
                                 stroke="#fff"
                                 strokeWidth={2}
                               />
                             ))}
                           </Pie>
+
                           <Tooltip
                             formatter={(value: number, name: string) => [
                               `${value}%`,

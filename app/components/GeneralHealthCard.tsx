@@ -29,11 +29,11 @@ export default function GeneralHealthCard() {
           Time Sync
         </h3>
         <p>
-          <span className="font-semibold text-gray-700">Source:</span>{" "}
+          <span className="font-semibold text-gray-700">Source:</span>
           <span className="font-medium">DC01</span>
         </p>
         <p>
-          <span className="font-semibold text-gray-700">NTP:</span>{" "}
+          <span className="font-semibold text-gray-700">NTP:</span>
           <span className="font-medium">time.windows.com</span>
         </p>
       </div>
@@ -54,15 +54,15 @@ export default function GeneralHealthCard() {
           {/* Info */}
           <div>
             <p>
-              <span className="font-semibold text-gray-700">Database:</span>{" "}
+              <span className="font-semibold text-gray-700">Database:</span>
               <span className="font-medium">ntds.dit</span>
             </p>
             <p>
-              <span className="font-semibold text-gray-700">Size:</span>{" "}
+              <span className="font-semibold text-gray-700">Size:</span>
               <span className="font-medium">2.3 GB</span>
             </p>
             <p>
-              <span className="font-semibold text-gray-700">Free Space:</span>{" "}
+              <span className="font-semibold text-gray-700">Free Space:</span>
               <span className="font-medium">500 MB</span>
             </p>
           </div>
@@ -71,6 +71,30 @@ export default function GeneralHealthCard() {
           <div className="w-32 h-32">
             <ResponsiveContainer>
               <PieChart>
+                {/* Define gradients once */}
+                <defs>
+                  <linearGradient
+                    id="ntdsUsedGradient"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="5%" stopColor="#008080" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#36DECE" stopOpacity={1} />
+                  </linearGradient>
+                  <linearGradient
+                    id="ntdsFreeGradient"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="5%" stopColor="#E5E7EB" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#D1D5DB" stopOpacity={1} />
+                  </linearGradient>
+                </defs>
+
                 <Pie
                   data={ntdsData}
                   dataKey="value"
@@ -85,7 +109,11 @@ export default function GeneralHealthCard() {
                   {ntdsData.map((entry, i) => (
                     <Cell
                       key={`cell-${i}`}
-                      fill={entry.color}
+                      fill={
+                        i === 0
+                          ? "url(#ntdsUsedGradient)"
+                          : "url(#ntdsFreeGradient)"
+                      }
                       stroke="#fff"
                       strokeWidth={2}
                     />
@@ -163,23 +191,23 @@ export default function GeneralHealthCard() {
           🔄 Replication Summary
         </h3>
         <p>
-          <span className="font-semibold text-gray-700">Partners Checked:</span>{" "}
+          <span className="font-semibold text-gray-700">Partners Checked:</span>
           <span className="font-medium">12</span>
         </p>
         <p>
           <span className="font-semibold text-gray-700">
             Failing Connections:
-          </span>{" "}
+          </span>
           <span className="font-medium text-red-600">2</span>
         </p>
         <p>
           <span className="font-semibold text-gray-700">
             Longest Since Sync:
-          </span>{" "}
+          </span>
           <span className="font-medium">45 min</span>
         </p>
         <p>
-          <span className="font-semibold text-gray-700">Avg Sync Time:</span>{" "}
+          <span className="font-semibold text-gray-700">Avg Sync Time:</span>
           <span className="font-medium">5 min</span>
         </p>
       </div>
