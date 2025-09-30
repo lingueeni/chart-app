@@ -41,9 +41,8 @@ export default function GeneralHealthCard() {
       <div className="bg-[#92C400]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition flex flex-col">
         <h3 className="flex items-center gap-2 font-poppins text-xl font-bold text-[#7FBA00] mb-4">
           <Image
-            src="/folder.svg" // place folder.svg inside /public
+            src="/ntds.svg" // place folder.svg inside /public
             alt="NTDS"
-            className="w-6 h-6 opacity-90"
             width={24}
             height={24}
           />
@@ -139,7 +138,12 @@ export default function GeneralHealthCard() {
       <div className="bg-[#00A4EF]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition flex flex-col text-left">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-14 h-14 rounded-full bg-[#00A4EF]/20 flex items-center justify-center mb-3">
-            <span className="text-2xl">📁</span>
+            <Image
+              src="/sysvol.svg" // place folder.svg inside /public
+              alt="NTDS"
+              width={30}
+              height={25}
+            />
           </div>
           <h3 className="font-poppins text-lg font-bold text-[#00A4EF] mb-2">
             SYSVOL / NETLOGON
@@ -149,19 +153,37 @@ export default function GeneralHealthCard() {
         {/* SysVol Checks */}
         <div className="space-y-2 text-sm text-gray-700">
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="text-green-600 w-4 h-4 mt-0.5" />
+            <span
+              className="w-5 h-5 flex items-center justify-center rounded-full 
+               bg-green-500 border border-green-600 shadow-sm"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+            </span>
             <span>
               File Replication Service (FRS) or DFS Replication service is
               running
             </span>
           </div>
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="text-green-600 w-4 h-4 mt-0.5" />
+            <span
+              className="w-5 h-5 flex items-center justify-center rounded-full 
+               bg-green-500 border border-green-600 shadow-sm"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+            </span>
             <span>SYSVOL folder is shared</span>
           </div>
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="text-green-600 w-4 h-4 mt-0.5" />
-            <span>SYSVOL has been replicated successfully</span>
+            <span
+              className="w-5 h-5 flex items-center justify-center rounded-full 
+               bg-green-500 border border-green-600 shadow-sm"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+            </span>
+            <span>
+              File Replication Service (FRS) or DFS Replication service is
+              running
+            </span>
           </div>
         </div>
 
@@ -170,25 +192,56 @@ export default function GeneralHealthCard() {
         {/* NetLogons Checks */}
         <div className="space-y-2 text-sm text-gray-700">
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="text-green-600 w-4 h-4 mt-0.5" />
+            <span
+              className="w-5 h-5 flex items-center justify-center rounded-full 
+               bg-green-500 border border-green-600 shadow-sm"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+            </span>
             <span>NETLOGON share is present</span>
           </div>
+
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="text-green-600 w-4 h-4 mt-0.5" />
+            <span
+              className="w-5 h-5 flex items-center justify-center rounded-full 
+               bg-green-500 border border-green-600 shadow-sm"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+            </span>
             <span>NETLOGON share is accessible</span>
           </div>
         </div>
 
         <div className="mt-4 flex justify-center">
-          <span className="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700 border border-green-300 shadow-sm">
-            Healthy ✅
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700 border border-green-300 shadow">
+            <span
+              className="w-6 h-6 flex items-center justify-center rounded-md 
+                 bg-gradient-to-br from-green-400 to-green-600 
+                 border-2 border-green-700 shadow-md"
+            >
+              <Image
+                src="/check.svg"
+                alt="Healthy"
+                width={14}
+                height={14}
+                className="opacity-95"
+              />
+            </span>
+            Healthy
           </span>
         </div>
       </div>
       {/* Replication Summary */}
       <div className="bg-[#FFC400]/10 p-6 rounded-xl shadow-md hover:shadow-lg transition md:col-span-1">
-        <h3 className="font-poppins text-xl font-bold text-[#0078D4] mb-4">
-          🔄 Replication Summary
+        <h3 className="flex items-center gap-2 font-poppins text-xl font-bold text-[#0078D4] mb-4">
+          <Image
+            src="/replication.svg"
+            alt="Replication"
+            width={24}
+            height={24}
+            className="opacity-90"
+          />
+          Replication Summary
         </h3>
         <p>
           <span className="font-semibold text-gray-700">Partners Checked:</span>

@@ -12,6 +12,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import Image from "next/image";
 
 export default function SecurityPrivilegedCard() {
   // Privileged groups with enabled flag
@@ -52,8 +53,8 @@ export default function SecurityPrivilegedCard() {
 
   // Inactive vs active accounts
   const inactiveAccounts = {
-    users: { inactive: 12, active: 88 },
-    computers: { inactive: 7, active: 43 },
+    users: { inactive: 30, active: 70 },
+    computers: { inactive: 20, active: 80 },
   };
 
   const userPieData = [
@@ -69,15 +70,30 @@ export default function SecurityPrivilegedCard() {
   return (
     <div className="bg-[#F3F9FF] shadow-md rounded-xl border border-[#004578]/20 p-6">
       {/* Main Title */}
-      <h2 className="text-xl font-bold text-[#004578] mb-6">
-        🔐 Security / Privileged
+      <h2 className="flex items-center gap-2 text-xl font-bold text-[#004578] mb-6">
+        <Image
+          src="/security.svg" // place security.svg inside /public
+          alt="Security"
+          width={24}
+          height={24}
+          className="opacity-90"
+        />
+        Security / Privileged
       </h2>
 
       {/* 1️⃣ Privileged Groups */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-[#004578] mb-3">
-          👥 Privileged Groups & Members
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-[#004578] mb-3">
+          <Image
+            src="/users.svg"
+            alt="Privileged Groups & Members"
+            width={24}
+            height={24}
+            className="opacity-90"
+          />
+          Privileged Groups & Members
         </h3>
+
         <div className="overflow-x-auto">
           <table className="w-full text-sm border border-[#004578]/30 rounded-lg">
             <thead>
@@ -106,7 +122,29 @@ export default function SecurityPrivilegedCard() {
                     )}
                     <td className="px-3 py-2">{member}</td>
                     <td className="px-3 py-2">
-                      {mIdx % 2 === 0 ? "✅ Yes" : "❌ No"}
+                      {mIdx % 2 === 0 ? (
+                        <span className="inline-flex items-center gap-1 text-green-700 font-medium">
+                          <Image
+                            src="/check.svg"
+                            alt="Yes"
+                            width={16}
+                            height={16}
+                            className="inline-block"
+                          />
+                          Yes
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-red-600 font-medium">
+                          <Image
+                            src="/x.svg"
+                            alt="No"
+                            width={16}
+                            height={16}
+                            className="inline-block"
+                          />
+                          No
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))
@@ -118,9 +156,17 @@ export default function SecurityPrivilegedCard() {
 
       {/* 2️⃣ Users with Passwords Never Expire */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-[#004578] mb-3">
-          🔑 Users with Passwords Never Expire
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-[#004578] mb-3">
+          <Image
+            src="/password.svg"
+            alt="Users with Passwords Never Expire"
+            width={24}
+            height={24}
+            className="opacity-90"
+          />
+          Users with Passwords Never Expire
         </h3>
+
         <div className="h-72 bg-white rounded-lg border border-gray-200 p-3">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -131,8 +177,8 @@ export default function SecurityPrivilegedCard() {
               {/* Gradient defs */}
               <defs>
                 <linearGradient id="userGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#00A4EF" stopOpacity={0.9} />
-                  <stop offset="95%" stopColor="#0078D7" stopOpacity={0.7} />
+                  <stop offset="5%" stopColor="#5caceeff" stopOpacity={0.9} />
+                  <stop offset="95%" stopColor="#0078d4" stopOpacity={0.7} />
                 </linearGradient>
                 <linearGradient
                   id="computerGradient"
@@ -141,8 +187,8 @@ export default function SecurityPrivilegedCard() {
                   x2="0"
                   y2="1"
                 >
-                  <stop offset="5%" stopColor="#FFC83D" stopOpacity={0.9} />
-                  <stop offset="95%" stopColor="#FFB900" stopOpacity={0.7} />
+                  <stop offset="5%" stopColor="#36DECE" stopOpacity={0.9} />
+                  <stop offset="95%" stopColor="#008080" stopOpacity={0.7} />
                 </linearGradient>
               </defs>
 
@@ -174,17 +220,43 @@ export default function SecurityPrivilegedCard() {
         </div>
       </div>
 
-      {/* 3️⃣ Inactive Accounts */}
+      {/* 3️⃣ Disabled Accounts */}
       <div>
-        <h3 className="text-lg font-semibold text-[#004578] mb-3">
-          📴 Disabled Accounts
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-[#004578] mb-3">
+          <Image
+            src="/disabled.svg"
+            alt="Disabled Accounts"
+            width={20}
+            height={20}
+            className="opacity-90"
+          />
+          Disabled Accounts
         </h3>
+
         <div className="grid grid-cols-2 gap-4">
           {/* Users Pie */}
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 text-center">
             <h4 className="font-semibold text-[#004578] mb-2">Users</h4>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
+                {/* Define gradients */}
+                <defs>
+                  <linearGradient id="grad-active" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="5%" stopColor="#4dabf7" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#0078d4" stopOpacity={1} />
+                  </linearGradient>
+                  <linearGradient
+                    id="grad-inactive"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="5%" stopColor="#ff8a80" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#d13438" stopOpacity={1} />
+                  </linearGradient>
+                </defs>
+
                 <Pie
                   data={userPieData}
                   dataKey="value"
@@ -194,8 +266,8 @@ export default function SecurityPrivilegedCard() {
                   outerRadius={70}
                   label
                 >
-                  <Cell fill="#0078D7" /> {/* Active Users */}
-                  <Cell fill="#FFB900" /> {/* Inactive Users */}
+                  <Cell fill="url(#grad-active)" /> {/* Active Users */}
+                  <Cell fill="url(#grad-inactive)" /> {/* Inactive Users */}
                 </Pie>
                 <Tooltip />
               </PieChart>
@@ -207,6 +279,30 @@ export default function SecurityPrivilegedCard() {
             <h4 className="font-semibold text-[#004578] mb-2">Computers</h4>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
+                {/* Define gradients */}
+                <defs>
+                  <linearGradient
+                    id="grad-computer-active"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="5%" stopColor="#36DECE" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#008080" stopOpacity={1} />
+                  </linearGradient>
+                  <linearGradient
+                    id="grad-computer-inactive"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="5%" stopColor="#ffd43b" stopOpacity={1} />
+                    <stop offset="95%" stopColor="#ff8c00" stopOpacity={1} />
+                  </linearGradient>
+                </defs>
+
                 <Pie
                   data={computerPieData}
                   dataKey="value"
@@ -216,8 +312,10 @@ export default function SecurityPrivilegedCard() {
                   outerRadius={70}
                   label
                 >
-                  <Cell fill="#28A745" /> {/* Active Computers */}
-                  <Cell fill="#DC3545" /> {/* Inactive Computers */}
+                  <Cell fill="url(#grad-computer-active)" />
+                  {/* Active Computers */}
+                  <Cell fill="url(#grad-computer-inactive)" />
+                  {/* Inactive Computers */}
                 </Pie>
                 <Tooltip />
               </PieChart>

@@ -1,6 +1,7 @@
 "use client";
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import Image from "next/image";
 
 interface NetworkAdapter {
   id: number;
@@ -37,8 +38,15 @@ export default function SystemPerformance() {
 
   return (
     <div className="bg-white/10 p-6 rounded-xl md:col-span-2 w-full">
-      <h3 className="font-poppins text-xl font-bold text-black mb-6">
-        🖥️ System Performance
+      <h3 className="flex items-center gap-2 font-poppins text-xl font-bold text-black mb-6">
+        <Image
+          src="/monitor.svg" // place monitor.svg inside /public
+          alt="System Performance"
+          width={24}
+          height={24}
+          className="opacity-90"
+        />
+        System Performance
       </h3>
 
       <div className="space-y-8">
@@ -99,8 +107,15 @@ export default function SystemPerformance() {
 
           return (
             <div key={idx} className="bg-white/40 p-4 rounded-lg shadow-sm">
-              <h4 className="font-semibold text-lg text-[#004578] mb-4">
-                📡 {domain.name}
+              <h4 className="flex items-center gap-2 font-semibold text-lg text-[#004578] mb-4">
+                <Image
+                  src="/domain.svg"
+                  alt="Domain"
+                  width={20}
+                  height={20}
+                  className="opacity-90"
+                />
+                {domain.name}
               </h4>
 
               {/* Charts */}
@@ -180,9 +195,17 @@ export default function SystemPerformance() {
               </div>
 
               {/* Network Adapters */}
-              <h5 className="font-semibold text-[#004578] mb-2">
-                🌐 Network Adapters
+              <h5 className="flex items-center gap-2 font-semibold text-[#004578] mb-2">
+                <Image
+                  src="/global.svg"
+                  alt="Network Adapters"
+                  width={20}
+                  height={20}
+                  className="opacity-90"
+                />
+                Network Adapters
               </h5>
+
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border border-grey/100 rounded-lg">
                   <thead>
@@ -199,7 +222,29 @@ export default function SystemPerformance() {
                       >
                         <td className="px-3 py-2">{adapter.name}</td>
                         <td className="px-3 py-2">
-                          {adapter.enabled ? "✅ Yes" : "❌ No"}
+                          {adapter.enabled ? (
+                            <span className="inline-flex items-center gap-1 text-green-700 font-medium">
+                              <Image
+                                src="/check.svg"
+                                alt="Yes"
+                                width={16}
+                                height={16}
+                                className="inline-block"
+                              />
+                              Yes
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 text-red-600 font-medium">
+                              <Image
+                                src="/x.svg"
+                                alt="No"
+                                width={16}
+                                height={16}
+                                className="inline-block"
+                              />
+                              No
+                            </span>
+                          )}
                         </td>
                       </tr>
                     ))}

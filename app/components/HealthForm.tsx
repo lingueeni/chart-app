@@ -199,7 +199,7 @@ export default function HealthForm() {
             type="submit"
             className="bg-[#0078D4] hover:bg-[#005A9E] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-colors duration-300"
           >
-            Run Health Check
+            Test Connection
           </button>
         </div>
       </form>
