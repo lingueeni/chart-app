@@ -1,4 +1,4 @@
-import HealthForm from "../components/HealthForm";
+import HealthForm from "@/components/HealthForm";
 
 export default function SettingsPage() {
   return (

@@ -1,10 +1,10 @@
-import PageHeader from "./components/PageHeader";
-import ForestCard from "./components/ForestCard";
-import SitesCard from "./components/SitesCard";
-import InstalledRolesCard from "./components/InstalledRolesCard";
-import GeneralHealthCard from "./components/GeneralHealthCard";
-import StatCards from "./components/headercards";
-import SecurityPrivilegedCard from "./components/SecurityPrivilegedCard";
+import PageHeader from "../components/PageHeader";
+import ForestCard from "../components/ForestCard";
+import SitesCard from "../components/SitesCard";
+import InstalledRolesCard from "../components/InstalledRolesCard";
+import GeneralHealthCard from "../components/GeneralHealthCard";
+import StatCards from "../components/headercards";
+import SecurityPrivilegedCard from "../components/SecurityPrivilegedCard";
 
 export default async function LandingPage() {
   return (

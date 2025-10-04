@@ -1,5 +1,5 @@
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
 import { Inter, Poppins, Roboto, Oswald } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });

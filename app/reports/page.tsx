@@ -1,4 +1,4 @@
-import HealthReportsTable from "../components/HealthReportsTable";
+import HealthReportsTable from "@/components/HealthReportsTable";
 import Image from "next/image";
 
 export default function ReportsPage() {
