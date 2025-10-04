@@ -13,6 +13,7 @@ export default function HealthForm() {
   const [ips, setIps] = useState<string[]>([]);
   const [currentIp, setCurrentIp] = useState("");
   const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false); // 🔹 New loading state
 
   // handle form inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,17 +48,20 @@ export default function HealthForm() {
     const payload = { ...form, ips };
 
     try {
+      setLoading(true); // 🔹 start loading
       const res = await fetch("https://json-server-d0eo.onrender.com/tasks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       const data = await res.json();
-      setModalMessage(`✅ connection successfull`);
+      setModalMessage(`✅ Connection successful`);
       setForm({ domain: "", username: "", password: "" });
       setIps([]);
     } catch (err) {
       setModalMessage("❌ Failed to submit. Please try again.");
+    } finally {
+      setLoading(false); // 🔹 stop loading always
     }
   };
 
@@ -73,10 +77,11 @@ export default function HealthForm() {
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        {/* Domain Input */}
         <div className="relative">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <Image
-              src="/global.svg" // make sure global.svg is inside /public folder
+              src="/global.svg"
               alt="Domain"
               className="w-5 h-5 opacity-70"
               width={20}
@@ -98,7 +103,7 @@ export default function HealthForm() {
         <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
           <label className="flex items-center gap-2 text-gray-700 font-semibold mb-2">
             <Image
-              src="/monitor.svg" // make sure monitor.svg is inside /public
+              src="/monitor.svg"
               alt="Domain Controller"
               className="w-5 h-5 opacity-80"
               width={20}
@@ -123,6 +128,14 @@ export default function HealthForm() {
               Add
             </button>
           </div>
+
+          {/* Validation message */}
+          {ips.length < 2 && (
+            <p className="text-red-500 text-sm mt-2">
+              ⚠️ Please enter at least 2 IP addresses.
+            </p>
+          )}
+
           {/* Chips */}
           <div className="flex flex-wrap gap-2 mt-3">
             {ips.map((ip) => (
@@ -152,6 +165,7 @@ export default function HealthForm() {
           )}
         </div>
 
+        {/* Username */}
         <div className="relative">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <Image
@@ -172,10 +186,12 @@ export default function HealthForm() {
             required
           />
         </div>
+
+        {/* Password */}
         <div className="relative">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <Image
-              src="/password.svg" // replace with your password icon
+              src="/password.svg"
               alt="Password"
               className="w-5 h-5 opacity-70"
               width={20}
@@ -197,9 +213,14 @@ export default function HealthForm() {
         <div className="flex justify-center mt-4">
           <button
             type="submit"
-            className="bg-[#0078D4] hover:bg-[#005A9E] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-colors duration-300"
+            disabled={loading}
+            className={`px-8 py-3 rounded-lg shadow-md font-semibold transition-colors duration-300 ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed text-white"
+                : "bg-[#0078D4] hover:bg-[#005A9E] text-white"
+            }`}
           >
-            Test Connection
+            {loading ? "Testing..." : "Test Connection"}
           </button>
         </div>
       </form>

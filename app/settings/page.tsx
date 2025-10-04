@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HealthForm from "../components/HealthForm";
 
 export default function SettingsPage() {

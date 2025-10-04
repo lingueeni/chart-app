@@ -1,13 +1,22 @@
-import HealthForm from "../components/HealthForm";
+import HealthReportsTable from "../components/HealthReportsTable";
+import Image from "next/image";
 
 export default function ReportsPage() {
   return (
-    <section className="bg-white p-8 rounded-2xl shadow-md hover:shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-shadow duration-300">
+    <section className="bg-white p-8 rounded-2xl shadow-md">
       <header className="mb-6">
         <h1 className="text-3xl font-oswald font-bold text-[#0078D4] flex items-center gap-2">
-          📊 Reports
+          <Image
+            src="/reports.svg"
+            alt="Reports"
+            width={28}
+            height={28}
+            className="opacity-90"
+          />
+          Reports
         </h1>
       </header>
+      <HealthReportsTable />
     </section>
   );
 }
