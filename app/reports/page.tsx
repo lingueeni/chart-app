@@ -5,7 +5,7 @@ export default function ReportsPage() {
   return (
     <section className="bg-white p-8 rounded-2xl shadow-md">
       <header className="mb-6">
-        <h1 className="text-3xl font-oswald font-bold text-[#0078D4] flex items-center gap-2">
+        <h1 className="text-3xl font-oswald font-bold text-gray-900 flex items-center gap-2">
           <Image
             src="/reports.svg"
             alt="Reports"
