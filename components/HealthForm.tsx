@@ -13,50 +13,64 @@ export default function HealthForm() {
   const [ips, setIps] = useState<string[]>([]);
   const [currentIp, setCurrentIp] = useState("");
   const [modalMessage, setModalMessage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false); // 🔹 New loading state
+  const [loading, setLoading] = useState(false);
 
-  // handle form inputs
+  // 🧠 Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // handle adding IPs
+  // ➕ Add IP
   const handleAddIp = () => {
-    if (!currentIp.trim()) return;
-    if (ips.includes(currentIp.trim())) return;
-    setIps([...ips, currentIp.trim()]);
+    const ip = currentIp.trim();
+    if (!ip) return;
+    if (ips.includes(ip)) return;
+    setIps([...ips, ip]);
     setCurrentIp("");
   };
 
+  // ❌ Remove IP
   const handleRemoveIp = (ip: string) => {
     setIps(ips.filter((i) => i !== ip));
   };
 
+  // 🧹 Clear all IPs
   const handleClearIps = () => {
     setIps([]);
   };
 
-  // handle submit
+  // 🚀 Submit form with validation
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // ✅ Validation: Must have at least one IP
+    if (ips.length === 0) {
+      setModalMessage(
+        "⚠️ Please add at least one Domain Controller IP before continuing."
+      );
+      return;
+    }
 
     const payload = { ...form, ips };
 
     try {
-      setLoading(true); // 🔹 start loading
+      setLoading(true);
       const res = await fetch("https://json-server-d0eo.onrender.com/tasks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
+
+      if (!res.ok) throw new Error("Failed to connect");
+
+      await res.json();
       setModalMessage(`✅ Connection successful`);
       setForm({ domain: "", username: "", password: "" });
       setIps([]);
     } catch (err) {
       setModalMessage("❌ Failed to submit. Please try again.");
     } finally {
-      setLoading(false); // 🔹 stop loading always
+      setLoading(false);
     }
   };
 
@@ -78,9 +92,9 @@ export default function HealthForm() {
             <Image
               src="/global.svg"
               alt="Domain"
-              className="w-5 h-5 opacity-70"
               width={20}
               height={20}
+              className="opacity-70"
             />
           </span>
           <input
@@ -89,20 +103,20 @@ export default function HealthForm() {
             placeholder="Domain Name"
             value={form.domain}
             onChange={handleChange}
-            className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0078D4] transition"
+            className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0078D4]"
             required
           />
         </div>
 
-        {/* Multi-value IP input */}
+        {/* Domain Controller IPs */}
         <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
           <label className="flex items-center gap-2 text-gray-700 font-semibold mb-2">
             <Image
               src="/monitor.svg"
               alt="Domain Controller"
-              className="w-5 h-5 opacity-80"
               width={20}
               height={20}
+              className="opacity-80"
             />
             Domain Controller IPs
           </label>
@@ -124,7 +138,7 @@ export default function HealthForm() {
             </button>
           </div>
 
-          {/* Chips */}
+          {/* IP chips */}
           <div className="flex flex-wrap gap-2 mt-3">
             {ips.map((ip) => (
               <span
@@ -142,6 +156,7 @@ export default function HealthForm() {
               </span>
             ))}
           </div>
+
           {ips.length > 0 && (
             <button
               type="button"
@@ -159,9 +174,9 @@ export default function HealthForm() {
             <Image
               src="/user.svg"
               alt="User"
-              className="w-5 h-5 opacity-70"
               width={20}
               height={20}
+              className="opacity-70"
             />
           </span>
           <input
@@ -170,7 +185,7 @@ export default function HealthForm() {
             placeholder="Username"
             value={form.username}
             onChange={handleChange}
-            className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0078D4] transition"
+            className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0078D4]"
             required
           />
         </div>
@@ -181,9 +196,9 @@ export default function HealthForm() {
             <Image
               src="/password.svg"
               alt="Password"
-              className="w-5 h-5 opacity-70"
               width={20}
               height={20}
+              className="opacity-70"
             />
           </span>
           <input
@@ -192,7 +207,7 @@ export default function HealthForm() {
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0078D4] transition"
+            className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0078D4]"
             required
           />
         </div>
