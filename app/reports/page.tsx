@@ -1,4 +1,5 @@
 import HealthReportsTable from "@/components/HealthReportsTable";
+import SystemTrends from "@/components/SystemTrends";
 import Image from "next/image";
 
 export default function ReportsPage() {
@@ -17,6 +18,7 @@ export default function ReportsPage() {
         </h1>
       </header>
       <HealthReportsTable />
+      <SystemTrends />
     </section>
   );
 }
