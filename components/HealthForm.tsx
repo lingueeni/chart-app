@@ -40,11 +40,6 @@ export default function HealthForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (ips.length < 2) {
-      setModalMessage("❌ Please enter at least 2 Domain Controller IPs.");
-      return;
-    }
-
     const payload = { ...form, ips };
 
     try {
@@ -128,13 +123,6 @@ export default function HealthForm() {
               Add
             </button>
           </div>
-
-          {/* Validation message */}
-          {ips.length < 2 && (
-            <p className="text-red-500 text-sm mt-2">
-              ⚠️ Please enter at least 2 IP addresses.
-            </p>
-          )}
 
           {/* Chips */}
           <div className="flex flex-wrap gap-2 mt-3">
