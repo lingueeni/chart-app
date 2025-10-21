@@ -1,12 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 
-export default function SitesPage() {
-  const router = useRouter();
-
-  // Example sites data (replace later with API data)
+export default function SitesDetailsPage() {
   const sites = [
     {
       id: 1,
@@ -14,12 +11,28 @@ export default function SitesPage() {
       replication: "Fully Meshed",
       topology: "Ring",
       domainControllers: 4,
+      users: 320,
+      computers: 180,
       fsmoHolders: [
         { role: "PDC Emulator", holder: "DC01" },
         { role: "RID Master", holder: "DC02" },
         { role: "Infrastructure Master", holder: "DC03" },
         { role: "Schema Master", holder: "DC01" },
         { role: "Domain Naming Master", holder: "DC04" },
+      ],
+      siteLinks: [
+        {
+          linkName: "HQ-Branch-Link",
+          connectedSites: ["HQ-Site", "Branch-Site"],
+          cost: 100,
+          schedule: "Always Available",
+        },
+        {
+          linkName: "HQ-Remote-Link",
+          connectedSites: ["HQ-Site", "Remote-Site"],
+          cost: 120,
+          schedule: "Mon–Fri, 8 AM–8 PM",
+        },
       ],
     },
     {
@@ -28,10 +41,20 @@ export default function SitesPage() {
       replication: "Hub and Spoke",
       topology: "Hub-Spoke",
       domainControllers: 2,
+      users: 150,
+      computers: 95,
       fsmoHolders: [
         { role: "PDC Emulator", holder: "DC05" },
         { role: "RID Master", holder: "DC05" },
         { role: "Infrastructure Master", holder: "DC06" },
+      ],
+      siteLinks: [
+        {
+          linkName: "Branch-HQ-Link",
+          connectedSites: ["Branch-Site", "HQ-Site"],
+          cost: 100,
+          schedule: "Always Available",
+        },
       ],
     },
     {
@@ -40,10 +63,20 @@ export default function SitesPage() {
       replication: "Hub and Spoke",
       topology: "Mesh",
       domainControllers: 3,
+      users: 110,
+      computers: 70,
       fsmoHolders: [
         { role: "PDC Emulator", holder: "DC07" },
         { role: "RID Master", holder: "DC08" },
         { role: "Infrastructure Master", holder: "DC09" },
+      ],
+      siteLinks: [
+        {
+          linkName: "Remote-HQ-Link",
+          connectedSites: ["Remote-Site", "HQ-Site"],
+          cost: 120,
+          schedule: "Mon–Fri, 8 AM–8 PM",
+        },
       ],
     },
     {
@@ -52,10 +85,20 @@ export default function SitesPage() {
       replication: "Hub and Spoke",
       topology: "Star",
       domainControllers: 2,
+      users: 60,
+      computers: 35,
       fsmoHolders: [
         { role: "PDC Emulator", holder: "DC10" },
         { role: "RID Master", holder: "DC11" },
         { role: "Infrastructure Master", holder: "DC12" },
+      ],
+      siteLinks: [
+        {
+          linkName: "DMZ-Backup-Link",
+          connectedSites: ["DMZ-Site", "Backup-Site"],
+          cost: 140,
+          schedule: "Weekdays, 6 AM–6 PM",
+        },
       ],
     },
     {
@@ -64,6 +107,8 @@ export default function SitesPage() {
       replication: "Hub and Spoke",
       topology: "Tree",
       domainControllers: 3,
+      users: 85,
+      computers: 50,
       fsmoHolders: [
         { role: "PDC Emulator", holder: "DC13" },
         { role: "RID Master", holder: "DC14" },
@@ -71,103 +116,132 @@ export default function SitesPage() {
         { role: "Schema Master", holder: "DC13" },
         { role: "Domain Naming Master", holder: "DC14" },
       ],
+      siteLinks: [
+        {
+          linkName: "Backup-HQ-Link",
+          connectedSites: ["Backup-Site", "HQ-Site"],
+          cost: 90,
+          schedule: "Always Available",
+        },
+        {
+          linkName: "Backup-DMZ-Link",
+          connectedSites: ["Backup-Site", "DMZ-Site"],
+          cost: 140,
+          schedule: "Weekdays, 6 AM–6 PM",
+        },
+      ],
     },
   ];
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 space-y-6">
-      {/* 🔹 Header */}
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 flex justify-between items-center">
-        <h3 className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
-          <span className="relative">
-            <span className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0078D4] via-[#107C10] to-[#FFB900]" />
-          </span>
+    <div className="p-8 bg-gray-50 min-h-screen">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-10">
+        <h1 className="text-3xl font-bold text-gray-900">
           Site Replication Details
-        </h3>
-
-        {/* Back Button */}
-        <button
-          onClick={() => router.push("/Dashboard")}
-          className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition"
+        </h1>
+        <Link
+          href="/Dashboard"
+          className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition"
         >
-          <span className="font-medium">Back to Dashboard</span>
+          <span className="text-sm font-medium">Back to Dashboard</span>
           <Image
             src="/arrow-right.svg"
-            alt="Back"
-            width={16}
-            height={16}
-            className="rotate-180 opacity-70 group-hover:opacity-100 transition"
+            alt="Arrow"
+            width={18}
+            height={18}
+            className="rotate-180"
           />
-        </button>
+        </Link>
       </div>
 
-      {/* 🔹 Sites List */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Masonry Layout */}
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
         {sites.map((site) => (
           <div
             key={site.id}
-            className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden"
+            className="break-inside-avoid mb-6 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
           >
             {/* Site Header */}
-            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-              <h4 className="text-lg font-semibold text-[#0078D4]">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-gray-900">
                 {site.name}
-              </h4>
-              <span className="text-sm text-gray-500">
-                {site.domainControllers} DCs
-              </span>
+              </h2>
+              <div className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                {site.replication}
+              </div>
             </div>
 
-            {/* Site Details */}
-            <div className="p-6 space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
-                <p>
-                  <strong className="text-gray-900">Replication:</strong>{" "}
-                  {site.replication}
-                </p>
-                <p>
-                  <strong className="text-gray-900">Topology:</strong>{" "}
-                  {site.topology}
-                </p>
-                <p>
-                  <strong className="text-gray-900">Controllers:</strong>{" "}
-                  {site.domainControllers}
-                </p>
-              </div>
+            {/* Basic Info */}
+            <div className="space-y-2 text-sm text-gray-700">
+              <p>
+                <span className="font-semibold text-gray-900">Topology:</span>{" "}
+                {site.topology}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  Domain Controllers:
+                </span>{" "}
+                {site.domainControllers}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">Users:</span>{" "}
+                {site.users}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">Computers:</span>{" "}
+                {site.computers}
+              </p>
+            </div>
 
-              {/* FSMO Holders */}
-              <div className="border-t border-gray-200 pt-4">
-                <h5 className="text-sm font-semibold text-gray-900 mb-2">
-                  FSMO Roles
-                </h5>
-                <table className="w-full border-collapse text-sm">
-                  <thead>
-                    <tr className="bg-gray-100 text-gray-600 uppercase text-xs">
-                      <th className="px-4 py-2 text-left font-semibold">
-                        Role
-                      </th>
-                      <th className="px-4 py-2 text-left font-semibold">
-                        Holder
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {site.fsmoHolders.map((role, idx) => (
-                      <tr
-                        key={idx}
-                        className="hover:bg-gray-50 border-b border-gray-100 transition"
-                      >
-                        <td className="px-4 py-2 text-gray-800 font-medium">
-                          {role.role}
-                        </td>
-                        <td className="px-4 py-2 text-gray-700">
-                          {role.holder}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            {/* FSMO Roles */}
+            <div className="mt-4 border-t pt-3">
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                FSMO Holders:
+              </h3>
+              <ul className="space-y-1 text-sm">
+                {site.fsmoHolders.map((fsmo, idx) => (
+                  <li
+                    key={idx}
+                    className="flex justify-between bg-gray-50 rounded-lg px-3 py-2 hover:bg-blue-50 transition"
+                  >
+                    <span className="text-gray-700">{fsmo.role}</span>
+                    <span className="font-medium text-gray-900">
+                      {fsmo.holder}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Site Links */}
+            <div className="mt-5 border-t pt-3">
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                Site Links:
+              </h3>
+              <ul className="space-y-2 text-sm">
+                {site.siteLinks.map((link, idx) => (
+                  <li
+                    key={idx}
+                    className="p-3 rounded-lg bg-gray-50 hover:bg-blue-50 border border-gray-100 transition"
+                  >
+                    <p className="font-semibold text-gray-900">
+                      {link.linkName}
+                    </p>
+                    <p className="text-gray-700 text-xs mt-1">
+                      <span className="font-semibold">Connected Sites:</span>{" "}
+                      {link.connectedSites.join(", ")}
+                    </p>
+                    <p className="text-gray-700 text-xs">
+                      <span className="font-semibold">Cost:</span> {link.cost}
+                    </p>
+                    <p className="text-gray-700 text-xs">
+                      <span className="font-semibold">Schedule:</span>{" "}
+                      {link.schedule}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
