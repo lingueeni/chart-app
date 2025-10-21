@@ -10,6 +10,8 @@ import {
   CartesianGrid,
   Cell,
 } from "recharts";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface Site {
   id: number;
@@ -22,6 +24,8 @@ interface Site {
 }
 
 export default function SitesCard() {
+  const router = useRouter();
+
   const sites: Site[] = [
     {
       id: 1,
@@ -72,11 +76,23 @@ export default function SitesCard() {
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-      <div className="relative px-6 py-4 border-b border-gray-200">
+      {/* 🔹 Clickable Header */}
+      <button
+        onClick={() => router.push("/sites")}
+        className="relative w-full text-left px-6 py-4 border-b border-gray-200 flex justify-between items-center hover:bg-gray-50 transition"
+      >
         <h3 className="text-2xl font-semibold text-gray-900">Sites</h3>
+        <Image
+          src="/arrow-right.svg"
+          alt="Go to Sites"
+          width={20}
+          height={20}
+          className="opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200"
+        />
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0078D4] via-[#107C10] to-[#FFB900]" />
-      </div>
+      </button>
 
+      {/* Body */}
       <div className="p-6">
         {/* Table */}
         <div className="overflow-x-auto">

@@ -50,7 +50,7 @@ export default function Navbar() {
         {/* Nav Links */}
         <nav className="flex space-x-10">
           {[
-            { href: "/", label: "Dashboard", color: "#F86828" }, // Orange
+            { href: "/Dashboard", label: "Dashboard", color: "#F86828" }, // Orange
             { href: "/reports", label: "Reports", color: "#92C400" }, // Green
             { href: "/settings", label: "Settings", color: "#FFC400" }, // Yellow
           ].map((link) => (
