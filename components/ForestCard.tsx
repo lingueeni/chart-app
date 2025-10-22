@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+
 export default function ForestCard() {
   const domains = [
     {
@@ -69,7 +72,23 @@ export default function ForestCard() {
 
         {/* Domains Subtable */}
         <div className="mt-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">Domains</h4>
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-lg font-semibold text-gray-900">Domains</h4>
+            <Link
+              href="/domain-controllers"
+              className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition group"
+            >
+              <span className="text-sm font-medium">View Details</span>
+              <Image
+                src="/arrow-right.svg"
+                alt="Go to Domain Controllers"
+                width={18}
+                height={18}
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
+
           <table className="w-full text-left border border-gray-200 rounded-lg overflow-hidden">
             <thead>
               <tr className="bg-gray-50">
@@ -86,7 +105,7 @@ export default function ForestCard() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {domains.map((d, i) => (
-                <tr key={i} className="hover:bg-gray-50">
+                <tr key={i} className="hover:bg-gray-50 transition">
                   <td className="px-4 py-3 text-gray-600">{d.name}</td>
                   <td className="px-4 py-3 text-gray-600">{d.osVersion}</td>
                   <td className="px-4 py-3 text-gray-600">{d.uptime}</td>

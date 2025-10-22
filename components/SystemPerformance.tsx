@@ -2,6 +2,7 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface NetworkAdapter {
   id: number;
@@ -20,6 +21,8 @@ interface Domain {
 }
 
 export default function SystemPerformance() {
+  const router = useRouter();
+
   const domains: Domain[] = [
     {
       name: "contoso.local",
@@ -37,19 +40,36 @@ export default function SystemPerformance() {
   ];
 
   return (
-    <div className="bg-white/10 p-6 rounded-xl md:col-span-2 w-full">
-      <h3 className="flex items-center gap-2 font-poppins text-xl font-bold text-black mb-6">
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow w-full">
+      {/* 🔹 Clickable Header */}
+      <button
+        onClick={() => router.push("/domain-controllers")}
+        className="relative w-full text-left px-6 py-4 border-b border-gray-200 flex justify-between items-center hover:bg-gray-50 transition group"
+      >
+        <div className="flex items-center gap-2">
+          <Image
+            src="/monitor.svg"
+            alt="System Performance"
+            width={24}
+            height={24}
+            className="opacity-90"
+          />
+          <h3 className="text-2xl font-semibold text-gray-900">
+            System Performance
+          </h3>
+        </div>
         <Image
-          src="/monitor.svg" // place monitor.svg inside /public
-          alt="System Performance"
-          width={24}
-          height={24}
-          className="opacity-90"
+          src="/arrow-right.svg"
+          alt="Go to Domain Controllers"
+          width={20}
+          height={20}
+          className="opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200"
         />
-        System Performance
-      </h3>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0078D4] via-[#107C10] to-[#FFB900]" />
+      </button>
 
-      <div className="space-y-8">
+      {/* 🔹 Body */}
+      <div className="p-6 space-y-8">
         {domains.map((domain, idx) => {
           const charts = [
             {
@@ -106,7 +126,10 @@ export default function SystemPerformance() {
           ];
 
           return (
-            <div key={idx} className="bg-white/40 p-4 rounded-lg shadow-sm">
+            <div
+              key={idx}
+              className="bg-white/40 p-4 rounded-lg shadow-sm border border-gray-100"
+            >
               <h4 className="flex items-center gap-2 font-semibold text-lg text-[#004578] mb-4">
                 <Image
                   src="/domain.svg"
@@ -123,7 +146,7 @@ export default function SystemPerformance() {
                 {charts.map((chart, idx2) => (
                   <div
                     key={idx2}
-                    className="flex flex-col items-center rounded-lg p-4 bg-white shadow-sm"
+                    className="flex flex-col items-center rounded-lg p-4 bg-white shadow-sm border border-gray-100"
                   >
                     <div className="h-32 w-full">
                       <ResponsiveContainer>
@@ -207,7 +230,7 @@ export default function SystemPerformance() {
               </h5>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-sm border border-grey/100 rounded-lg">
+                <table className="w-full text-sm border border-gray-200 rounded-lg">
                   <thead>
                     <tr className="bg-[#E5F1FB] text-[#004578]">
                       <th className="px-3 py-2 text-left">Name</th>
